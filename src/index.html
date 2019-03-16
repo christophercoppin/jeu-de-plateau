@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="theme-color" content="#3367D6" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Jeu de plateau</title>
+  <link rel="icon" href="img/favicon.ico">
+  <link rel="manifest" href="manifest.json">
+
+</head>
+
+<body>
+  <div class="chargement chargement-en-cours"><img src="img/ajax-loader.gif" alt=""></div>
+  <main class="container">
+    <section class="joueur-1-log">
+      <div class="bloc-perso">
+        <h2>Joueur 1</h2>
+        <div class="perso__wrapper">
+          <div class="perso">
+
+          </div>
+        </div>
+        <div class="pv-bar">
+          <progress class="pv" value="70" max="100"></progress><span>70pv</span>
+        </div>
+      </div>
+      <div class="combat hidden">
+        <div class="attaque">
+          <img src="img/300w/weapon-2.png" alt="">
+        </div>
+        <div class="defense">
+          <img src="img/300w/bouclier.png" alt="">
+        </div>
+      </div>
+    </section>
+    <section class="plateau">
+      <div class="case case--1-1" data-caseY="1" data-caseX="1"></div>
+      <div class="case case--1-2" data-caseY="2" data-caseX="1"></div>
+      <div class="case case--1-3" data-caseY="3" data-caseX="1"></div>
+      <div class="case case--1-4" data-caseY="4" data-caseX="1"></div>
+      <div class="case case--1-5" data-caseY="5" data-caseX="1"></div>
+      <div class="case case--1-6" data-caseY="6" data-caseX="1"></div>
+      <div class="case case--1-7" data-caseY="7" data-caseX="1"></div>
+      <div class="case case--1-8" data-caseY="8" data-caseX="1"></div>
+      <div class="case case--1-9" data-caseY="9" data-caseX="1"></div>
+      <div class="case case--1-10" data-caseY="10" data-caseX="1"></div>
+      <div class="case case--2-1" data-caseY="1" data-caseX="2"></div>
+      <div class="case case--2-2" data-caseY="2" data-caseX="2"></div>
+      <div class="case case--2-3" data-caseY="3" data-caseX="2"></div>
+      <div class="case case--2-4" data-caseY="4" data-caseX="2"></div>
+      <div class="case case--2-5" data-caseY="5" data-caseX="2"></div>
+      <div class="case case--2-6" data-caseY="6" data-caseX="2"></div>
+      <div class="case case--2-7" data-caseY="7" data-caseX="2"></div>
+      <div class="case case--2-8" data-caseY="8" data-caseX="2"></div>
+      <div class="case case--2-9" data-caseY="9" data-caseX="2"></div>
+      <div class="case case--2-10" data-caseY="10" data-caseX="2"></div>
+      <div class="case case--3-1" data-caseY="1" data-caseX="3"></div>
+      <div class="case case--3-2" data-caseY="2" data-caseX="3"></div>
+      <div class="case case--3-3" data-caseY="3" data-caseX="3"></div>
+      <div class="case case--3-4" data-caseY="4" data-caseX="3"></div>
+      <div class="case case--3-5 " data-caseY="5" data-caseX="3"></div>
+      <div class="case case--3-6" data-caseY="6" data-caseX="3"></div>
+      <div class="case case--3-7" data-caseY="7" data-caseX="3"></div>
+      <div class="case case--3-8" data-caseY="8" data-caseX="3"></div>
+      <div class="case case--3-9" data-caseY="9" data-caseX="3"></div>
+      <div class="case case--3-10" data-caseY="10" data-caseX="3"></div>
+      <div class="case case--4-1" data-caseY="1" data-caseX="4"></div>
+      <div class="case case--4-2" data-caseY="2" data-caseX="4"></div>
+      <div class="case case--4-3" data-caseY="3" data-caseX="4"></div>
+      <div class="case case--4-4" data-caseY="4" data-caseX="4"></div>
+      <div class="case case--4-5" data-caseY="5" data-caseX="4"></div>
+      <div class="case case--4-6" data-caseY="6" data-caseX="4"></div>
+      <div class="case case--4-7" data-caseY="7" data-caseX="4"></div>
+      <div class="case case--4-8" data-caseY="8" data-caseX="4"></div>
+      <div class="case case--4-9" data-caseY="9" data-caseX="4"></div>
+      <div class="case case--4-10" data-caseY="10" data-caseX="4"></div>
+      <div class="case case--5-1" data-caseY="1" data-caseX="5"></div>
+      <div class="case case--5-2" data-caseY="2" data-caseX="5"></div>
+      <div class="case case--5-3" data-caseY="3" data-caseX="5"></div>
+      <div class="case case--5-4" data-caseY="4" data-caseX="5"></div>
+      <div class="case case--5-5" data-caseY="5" data-caseX="5"></div>
+      <div class="case case--5-6" data-caseY="6" data-caseX="5"></div>
+      <div class="case case--5-7" data-caseY="7" data-caseX="5"></div>
+      <div class="case case--5-8" data-caseY="8" data-caseX="5"></div>
+      <div class="case case--5-9" data-caseY="9" data-caseX="5"></div>
+      <div class="case case--5-10" data-caseY="10" data-caseX="5"></div>
+      <div class="case case--6-1" data-caseY="1" data-caseX="6"></div>
+      <div class="case case--6-2" data-caseY="2" data-caseX="6"></div>
+      <div class="case case--6-3" data-caseY="3" data-caseX="6"></div>
+      <div class="case case--6-4" data-caseY="4" data-caseX="6"></div>
+      <div class="case case--6-5" data-caseY="5" data-caseX="6"></div>
+      <div class="case case--6-6" data-caseY="6" data-caseX="6"></div>
+      <div class="case case--6-7" data-caseY="7" data-caseX="6"></div>
+      <div class="case case--6-8" data-caseY="8" data-caseX="6"></div>
+      <div class="case case--6-9" data-caseY="9" data-caseX="6"></div>
+      <div class="case case--6-10" data-caseY="10" data-caseX="6"></div>
+      <div class="case case--7-1" data-caseY="1" data-caseX="7"></div>
+      <div class="case case--7-2" data-caseY="2" data-caseX="7"></div>
+      <div class="case case--7-3" data-caseY="3" data-caseX="7"></div>
+      <div class="case case--7-4" data-caseY="4" data-caseX="7"></div>
+      <div class="case case--7-5" data-caseY="5" data-caseX="7"></div>
+      <div class="case case--7-6" data-caseY="6" data-caseX="7"></div>
+      <div class="case case--7-7" data-caseY="7" data-caseX="7"></div>
+      <div class="case case--7-8" data-caseY="8" data-caseX="7"></div>
+      <div class="case case--7-9" data-caseY="9" data-caseX="7"></div>
+      <div class="case case--7-10" data-caseY="10" data-caseX="7"></div>
+      <div class="case case--8-1" data-caseY="1" data-caseX="8"></div>
+      <div class="case case--8-2" data-caseY="2" data-caseX="8"></div>
+      <div class="case case--8-3" data-caseY="3" data-caseX="8"></div>
+      <div class="case case--8-4" data-caseY="4" data-caseX="8"></div>
+      <div class="case case--8-5" data-caseY="5" data-caseX="8"></div>
+      <div class="case case--8-6" data-caseY="6" data-caseX="8"></div>
+      <div class="case case--8-7" data-caseY="7" data-caseX="8"></div>
+      <div class="case case--8-8" data-caseY="8" data-caseX="8"></div>
+      <div class="case case--8-9" data-caseY="9" data-caseX="8"></div>
+      <div class="case case--8-10" data-caseY="10" data-caseX="8"></div>
+      <div class="case case--9-1" data-caseY="1" data-caseX="9"></div>
+      <div class="case case--9-2" data-caseY="2" data-caseX="9"></div>
+      <div class="case case--9-3" data-caseY="3" data-caseX="9"></div>
+      <div class="case case--9-4" data-caseY="4" data-caseX="9"></div>
+      <div class="case case--9-5" data-caseY="5" data-caseX="9"></div>
+      <div class="case case--9-6" data-caseY="6" data-caseX="9"></div>
+      <div class="case case--9-7" data-caseY="7" data-caseX="9"></div>
+      <div class="case case--9-8" data-caseY="8" data-caseX="9"></div>
+      <div class="case case--9-9" data-caseY="9" data-caseX="9"></div>
+      <div class="case case--9-10" data-caseY="10" data-caseX="9"></div>
+      <div class="case case--10-1" data-caseY="1" data-caseX="10"></div>
+      <div class="case case--10-2" data-caseY="2" data-caseX="10"></div>
+      <div class="case case--10-3" data-caseY="3" data-caseX="10"></div>
+      <div class="case case--10-4" data-caseY="4" data-caseX="10"></div>
+      <div class="case case--10-5" data-caseY="5" data-caseX="10"></div>
+      <div class="case case--10-6" data-caseY="6" data-caseX="10"></div>
+      <div class="case case--10-7" data-caseY="7" data-caseX="10"></div>
+      <div class="case case--10-8" data-caseY="8" data-caseX="10"></div>
+      <div class="case case--10-9" data-caseY="9" data-caseX="10"></div>
+      <div class="case case--10-10" data-caseY="10" data-caseX="10"></div>
+      <div class="fin-jeu hidden"></div>
+    </section>
+    <section class="joueur-2-log">
+      <div class="bloc-perso">
+        <h2>Stanislas</h2>
+        <div class="perso__wrapper">
+          <div class="perso">
+
+          </div>
+        </div>
+        <div class="pv-bar">
+          <progress class="pv" value="50" max="100"></progress><span></span>
+        </div>
+      </div>
+      <div class="combat hidden">
+        <div class="attaque">
+          <img src="img/300w/weapon-2.png" alt="">
+        </div>
+        <div class="defense">
+          <img src="img/300w/bouclier.png" alt="">
+        </div>
+      </div>
+    </section>
+  </main>
+
+
+  </div>
+
+</body>
+
+</html>

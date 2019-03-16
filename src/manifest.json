@@ -1,0 +1,27 @@
+{
+
+    "name": "Jeu de plateau: Orcfury",
+    "short_name": "Orcfury",
+    "display": "standalone",
+    "orientation" : "landscape",
+    "start_url": "/",
+    "icons": [
+        {
+            "src": "img/144w/appicon_144.png",
+            "type": "image/png",
+            "sizes": "144x144"
+        },
+        {
+            "src": "img/192w/appicon_192.png",
+            "type": "image/png",
+            "sizes": "192x192"
+        },
+        {
+            "src": "img/512w/appicon_512.png",
+            "type": "image/png",
+            "sizes": "512x512"
+        } 
+    ],
+    "background_color": "#3367D6",
+    "theme_color": "#3367D6"
+  }

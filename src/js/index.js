@@ -237,12 +237,100 @@ $(document).ready(() => {
             return personnagesProches = true;
         } else {
             console.log('les personnages ne sont pas trop proches');
-            return personnagesProches = false;
+        }
+
+        controleCases(positionJoueur1X, positionJoueur1Y);
+
+        let armesTrouve;
+        let personnageTrouve;
+
+        for (const arme of coordonneesArmes) {
+            if($(`[data-casex="${arme[0]}"][data-casey="${arme[1]}"]`).hasClass('checked')) {
+                armesTrouve = true;
+            } else {
+                armesTrouve = false;
+                break;
+            }
+        }
+
+        if($(`[data-casex="${positionJoueur2X}"][data-casey="${positionJoueur2Y}"]`).hasClass('checked')) {
+            personnageTrouve = true;
+        } else {
+            personnageTrouve = false;
+        }
+
+        console.log(armesTrouve);
+        console.log(personnageTrouve);
+
+        if(armesTrouve && personnageTrouve) {
+            return personnagesProches = false; 
+        } else {
+
+            $('.checked').removeClass('checked');
+            return personnagesProches = true;
+        }
+        
+    }
+
+    const controleCases = (positionX, positionY) => {
+
+        const positionXAvant = parseInt(positionX) - 1;
+        const positionXApres = parseInt(positionX) + 1;
+        const positionYAvant = parseInt(positionY) - 1;
+        const positionYApres = parseInt(positionY) + 1;
+
+        $(`[data-casex="${positionX}"][data-casey="${positionY}"]`).addClass('checked');
+
+        const positionTop = $(`[data-casex="${positionXAvant}"][data-casey="${positionY}"]`);
+        const positionBottom = $(`[data-casex="${positionXApres}"][data-casey="${positionY}"]`);
+        const positionLeft = $(`[data-casex="${positionX}"][data-casey="${positionYAvant}"]`);
+        const positionRight = $(`[data-casex="${positionX}"][data-casey="${positionYApres}"]`);
+
+            if($(positionTop).length !== 0 && !$(positionTop).hasClass('checked')) {
+
+                if($(positionTop).hasClass('wall')) {
+                    console.log(positionTop);
+                } else {
+                    console.log('Il y a une case libre au dessus de la case ' + positionX + ',' + positionY);
+                    controleCases($(positionTop).attr('data-casex'), $(positionTop).attr('data-casey'));
+                }
+            }
+            
+            if($(positionBottom).length !== 0 && !$(positionBottom).hasClass('checked')) {
+
+                if($(positionBottom).hasClass('wall')) {
+                    console.log(positionBottom);
+                } else {
+                    console.log('Il y a une case libre au dessous de la case ' + positionX + ',' + positionY);
+                    controleCases($(positionBottom).attr('data-casex'), $(positionBottom).attr('data-casey'));
+                }
+            }
+
+            if($(positionLeft).length !== 0 && !$(positionLeft).hasClass('checked')) {
+
+                if($(positionLeft).hasClass('wall')) {
+                    console.log(positionLeft);
+                } else {
+                    console.log('Il y a une case libre a gauche de la case ' + positionX + ',' + positionY);
+                    controleCases($(positionLeft).attr('data-casex'), $(positionLeft).attr('data-casey'));
+            }
+        }
+
+            if($(positionRight).length !== 0 && !$(positionRight).hasClass('checked')) {
+
+                if($(positionRight).hasClass('wall')) {
+                    console.log(positionRight);
+                } else {
+                    console.log('Il y a une case libre a droite de la case ' + positionX + ',' + positionY);
+                    controleCases($(positionRight).attr('data-casex'), $(positionRight).attr('data-casey'));
+            }
         }
     }
 
     
     while(positionPersonnages()) {
+
+
         coordonneesPersonnages.length = 0;
         assignerCoordonnees(2, coordonneesPersonnages);
 
@@ -254,6 +342,19 @@ $(document).ready(() => {
 
             $(`[data-casex="${coordonneesPersonnages[i][0]}"][data-casey="${coordonneesPersonnages[i][1]}"]`).html(`<img src="img/300w/orc-${personnagesChoisi[i]}--weapon-1.png" alt="">`).addClass(`joueur joueur-${i}`);
         }
+
+        coordonneesArmes.length = 0;
+        assignerCoordonnees(nombreArme, coordonneesArmes);
+        console.log('nombre arme' + nombreArme);
+        $('.weapon').empty().removeClass('weapon');
+
+        for (let i = 0; i < nombreArme; i++) {
+            
+    
+            const choixArme = Math.floor(Math.random() * 5) + 1;
+    
+            $(`[data-casex="${coordonneesArmes[i][0]}"][data-casey="${coordonneesArmes[i][1]}"]`).html(`<img src="img/300w/weapon-${choixArme}.png" alt="">`).addClass('weapon').data('id-arme', choixArme);
+        } 
 
     console.log(coordonneesPersonnages);
     }

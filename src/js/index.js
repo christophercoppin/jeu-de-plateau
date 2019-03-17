@@ -182,10 +182,7 @@ $(document).ready(() => {
 
         let premierEssai = true;
 
-        while( premierEssai === true) {
-            joueurs[i].assignerPosition(coordonneesPersonnages[i]);
-            premierEssai = false;
-        }
+        joueurs[i].assignerPosition(coordonneesPersonnages[i]);
 
         
 
@@ -209,8 +206,6 @@ $(document).ready(() => {
                 break;
         }
 
-
-
         joueurs[i].assignerArme(1);
 
         $(`.joueur-${i + 1}-log h2`).text(joueurs[i].personnage.nom);
@@ -225,6 +220,42 @@ $(document).ready(() => {
         $(`.joueur-${i + 1}-log .pv-bar span`).text(`${joueurs[i].pointsDeVie} pv`);
 
         $(`[data-casex="${coordonneesPersonnages[i][0]}"][data-casey="${coordonneesPersonnages[i][1]}"]`).html(`<img src="img/300w/orc-${personnagesChoisi[i]}--weapon-1.png" alt="">`).addClass(`joueur joueur-${i}`);
+    }
+
+    const positionPersonnages = () => {
+        const positionJoueur1X = joueurs[0].position[0];
+        const positionJoueur1Y = joueurs[0].position[1];
+        const positionJoueur2X = joueurs[1].position[0];
+        const positionJoueur2Y = joueurs[1].position[1];
+        let personnagesProches;
+
+        console.log(joueurs[0].position);
+        console.log(joueurs[1].position);
+
+        if ((positionJoueur1X === positionJoueur2X && (positionJoueur1Y === positionJoueur2Y + 1 || positionJoueur1Y === positionJoueur2Y - 1)) || (positionJoueur1Y === positionJoueur2Y && (positionJoueur1X === positionJoueur2X + 1 || positionJoueur1X === positionJoueur2X - 1)) || (positionJoueur1X === positionJoueur2X + 1 && (positionJoueur1Y === positionJoueur2Y + 1 || positionJoueur1Y === positionJoueur2Y - 1)) || (positionJoueur1X === positionJoueur2X - 1 && (positionJoueur1Y === positionJoueur2Y + 1 || positionJoueur1Y === positionJoueur2Y - 1))) {
+            console.log('les personnages sont trop proches');
+            return personnagesProches = true;
+        } else {
+            console.log('les personnages ne sont pas trop proches');
+            return personnagesProches = false;
+        }
+    }
+
+    
+    while(positionPersonnages()) {
+        coordonneesPersonnages.length = 0;
+        assignerCoordonnees(2, coordonneesPersonnages);
+
+        for(let i = 0; i < 2; i++) {
+            joueurs[i].assignerPosition(coordonneesPersonnages[i]);
+            console.log('La position des personnages à été modifié');
+
+            $(`.joueur-${i}`).empty().removeClass(`joueur joueur-${i}`)
+
+            $(`[data-casex="${coordonneesPersonnages[i][0]}"][data-casey="${coordonneesPersonnages[i][1]}"]`).html(`<img src="img/300w/orc-${personnagesChoisi[i]}--weapon-1.png" alt="">`).addClass(`joueur joueur-${i}`);
+        }
+
+    console.log(coordonneesPersonnages);
     }
 
     const posJoueurActif = [$('.joueur-0').data().casex, $('.joueur-0').data().casey];

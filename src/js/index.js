@@ -40,10 +40,8 @@ const joueurs = [joueur1, joueur2];
 
 
 $(window).on('load', function () {
-    setTimeout(function () {
         $('.chargement').removeClass('chargement-en-cours');
-        console.log('Chargement termine');
-    }, 1000);
+        console.log('Chargement termine');;
 
 });
 
@@ -161,7 +159,7 @@ $(document).ready(() => {
 
     for (let i = 0; i < nombreArme; i++) {
 
-        const choixArme = Math.floor(Math.random() * 5) + 1;
+        const choixArme = Math.floor(Math.random() * 4) + 2;
 
         $(`[data-casex="${coordonneesArmes[i][0]}"][data-casey="${coordonneesArmes[i][1]}"]`).html(`<img src="img/300w/weapon-${choixArme}.png" alt="">`).addClass('weapon').data('id-arme', choixArme);
     }
@@ -351,7 +349,7 @@ $(document).ready(() => {
         for (let i = 0; i < nombreArme; i++) {
             
     
-            const choixArme = Math.floor(Math.random() * 5) + 1;
+            const choixArme = Math.floor(Math.random() * 4) + 2;
     
             $(`[data-casex="${coordonneesArmes[i][0]}"][data-casey="${coordonneesArmes[i][1]}"]`).html(`<img src="img/300w/weapon-${choixArme}.png" alt="">`).addClass('weapon').data('id-arme', choixArme);
         } 
@@ -502,11 +500,14 @@ $(document).ready(() => {
                 timeout = 100;
             }
     
-            for(let i = 1; i <= degats; i++) {
-                reduirePointsDeVie(adversaire, pointsDeVie, i, timeout);
-            }
-    
-            $(`.joueur-${adversaire + 1}-log progress`).attr('value', joueurs[adversaire].pointsDeVie);
+            setTimeout(() => {
+                for(let i = 1; i <= degats; i++) {
+                    reduirePointsDeVie(adversaire, pointsDeVie, i, timeout);
+                }
+        
+                $(`.joueur-${adversaire + 1}-log progress`).attr('value', joueurs[adversaire].pointsDeVie);
+            }, 1000);
+            
     
             if (joueurs[adversaire].pointsDeVie === 0) {
 

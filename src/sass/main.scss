@@ -335,6 +335,22 @@ progress[value] {
     transform: rotate(0deg);
 }
 
+.reload {
+  position: absolute;
+  top:75%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1100;
+  &__btn {
+
+    background-color: $color-grey-blue-dark;
+    color: $color-yellow-light;
+    font-size: 30px;
+    padding: 10px 30px;
+    border-radius: 100px;
+  }
+}
+
 /*
 Webkit browsers provide two pseudo classes that can be use to style HTML5 progress element.
 -webkit-progress-bar -> To style the progress element container

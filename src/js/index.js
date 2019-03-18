@@ -422,13 +422,19 @@ $(document).ready(() => {
                     for (let i = 0; i < 6; i++) {
     
                         $('.fin-jeu').animate({
-                            fontSize: "50px"
+                            fontSize: "30px"
                         }, 500).animate({
-                            fontSize: "70px"
+                            fontSize: "50px"
                         }, 500);
+
                     }
     
     
+                    $('.reload').removeClass('hidden');
+                    $('.reload__btn').on('click', () => {
+                        location.reload(false);
+                    });
+                    
                 }
                 setTimeout(() => {
                     $(`.joueur-${activePlayer + 1}-log .perso`).css('background-image', `url("img/orc-${joueurs[activePlayer].personnage.idPersonnages}--gagne.png")`);

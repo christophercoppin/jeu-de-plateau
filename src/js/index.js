@@ -154,9 +154,6 @@ $(document).ready(() => {
         const positionJoueur2X = joueurs[1].position[0];
         const positionJoueur2Y = joueurs[1].position[1];
 
-        console.log(joueurs[0].position);
-        console.log(joueurs[1].position);
-
         if ((positionJoueur1X === positionJoueur2X && (positionJoueur1Y === positionJoueur2Y + 1 || positionJoueur1Y === positionJoueur2Y - 1)) || (positionJoueur1Y === positionJoueur2Y && (positionJoueur1X === positionJoueur2X + 1 || positionJoueur1X === positionJoueur2X - 1)) || (positionJoueur1X === positionJoueur2X + 1 && (positionJoueur1Y === positionJoueur2Y + 1 || positionJoueur1Y === positionJoueur2Y - 1)) || (positionJoueur1X === positionJoueur2X - 1 && (positionJoueur1Y === positionJoueur2Y + 1 || positionJoueur1Y === positionJoueur2Y - 1))) {
             return personnagesProches = true;
         }
@@ -174,7 +171,6 @@ $(document).ready(() => {
 
         for(let i = 0; i < 2; i++) {
             joueurs[i].assignerPosition(coordonneesPersonnages[i]);
-            console.log('La position des personnages à été modifié');
 
             carteView.afficherPersonnage(coordonneesPersonnages[i], personnagesChoisi[i], i);
         }
@@ -244,7 +240,6 @@ $(document).ready(() => {
     const reduirePointsDeVie = (adversaire, pointsDeVie, i, timeout) => {
 
         setTimeout(function () {
-            console.log(pointsDeVie - i);
             $(`.joueur-${adversaire + 1}-log .pv-bar span`).text(`${pointsDeVie - i} pv`);
         }, timeout * i);
     }

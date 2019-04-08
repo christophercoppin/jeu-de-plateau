@@ -204,7 +204,7 @@ $(document).ready(() => {
         $(`.joueur-${i + 1}-log progress`).attr('value', joueurs[i].pointsDeVie);
         $(`.joueur-${i + 1}-log .pv-bar span`).text(`${joueurs[i].pointsDeVie} pv`);
 
-        $(`[data-casex="${coordonneesPersonnages[i][0]}"][data-casey="${coordonneesPersonnages[i][1]}"]`).html(`<img src="img/300w/orc-${personnagesChoisi[i]}--weapon-1.png" alt="">`).addClass(`joueur joueur-${i}`);
+        $(`[data-casex="${coordonneesPersonnages[i][0]}"][data-casey="${coordonneesPersonnages[i][1]}"]`).html(`<img src="img/300w/orc-${personnagesChoisi[i]}--weapon-1.png" alt="">`).addClass(`joueur-${i}`);
     }
 
     const positionPersonnages = () => {
@@ -248,6 +248,7 @@ $(document).ready(() => {
         console.log(personnageTrouve);
 
         if(armesTrouve && personnageTrouve) {
+            $('.checked').removeClass('checked');
             return personnagesProches = false; 
         } else {
 
@@ -323,9 +324,9 @@ $(document).ready(() => {
             joueurs[i].assignerPosition(coordonneesPersonnages[i]);
             console.log('La position des personnages à été modifié');
 
-            $(`.joueur-${i}`).empty().removeClass(`joueur joueur-${i}`)
+            $(`.joueur-${i}`).empty().removeClass(`joueur-${i}`)
 
-            $(`[data-casex="${coordonneesPersonnages[i][0]}"][data-casey="${coordonneesPersonnages[i][1]}"]`).html(`<img src="img/300w/orc-${personnagesChoisi[i]}--weapon-1.png" alt="">`).addClass(`joueur joueur-${i}`);
+            $(`[data-casex="${coordonneesPersonnages[i][0]}"][data-casey="${coordonneesPersonnages[i][1]}"]`).html(`<img src="img/300w/orc-${personnagesChoisi[i]}--weapon-1.png" alt="">`).addClass(`joueur-${i}`);
         }
 
         coordonneesArmes.length = 0;
@@ -369,13 +370,10 @@ $(document).ready(() => {
         if (joueurs[activePlayer].idAncienneArme !== '') {
             $(`.joueur-actif`).html(`<img src="img/300w/weapon-${joueurs[activePlayer].idAncienneArme}.png" alt="">`).addClass('weapon').data('id-arme', joueurs[activePlayer].idAncienneArme);
 
-
-
-
             joueurs[activePlayer].idAncienneArme = '';
         }
 
-        $('.joueur-actif').removeClass(`joueur-actif joueur-${activePlayer}`);
+        $('.joueur-actif').removeClass(`joueur-actif joueur-${activePlayer} direction-gauche direction-droite`);
 
         if ($(this).hasClass('weapon')) {
             joueurs[activePlayer].assignerArme($(this).data('id-arme'), joueurs[activePlayer].personnage.arme.idArme);

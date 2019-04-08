@@ -21,3 +21,46 @@ export const creationCarte = ( nombreDeCasesHorizontal = 10, nombreDeCasesVertic
     $(carteElement).appendTo('.plateau');
 
 }
+
+export const initialisationMouvements = (activePlayer) => {
+    $('.choix-possible').removeClass('choix-possible');
+
+    let activePlayerCell = $(`.joueur-${activePlayer}`).data();
+    const activePlayerCellX = activePlayerCell.casex;
+    const activePlayerCellY = activePlayerCell.casey;
+    
+    const directions = ['gauche', 'droite', 'haut', 'bas']
+    
+    for ( let direction of directions ) {
+        let caseX = activePlayerCellX;
+        let caseY = activePlayerCellY;
+        
+        
+        for (let i = 1; i <= 3; i++) {
+
+            switch (direction) {
+                case 'gauche':
+                    caseX = activePlayerCellX + i;
+                    break;
+                case 'droite':
+                    caseX = activePlayerCellX - i;
+                    break;
+                case 'haut':
+                    caseY = activePlayerCellY + i;
+                    break;
+                case 'bas':
+                    caseY = activePlayerCellY - i;
+                    break;
+                default:
+                    break;
+            }
+            
+            if ($(`[data-casex="${caseX}"][data-casey="${caseY}"]`).hasClass('wall') || $(`[data-casex="${caseX}"][data-casey="${caseY}"]`).is('[class*=joueur-]')) {
+                break;
+            } else {
+                $(`[data-casex="${caseX}"][data-casey="${caseY}"]`).addClass('choix-possible');
+            }
+        }
+    }
+
+}

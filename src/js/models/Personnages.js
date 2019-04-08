@@ -52,7 +52,7 @@ export default class Personnages {
         this.ancienneArme = this.idArme;
         
 
-        this.adressePng = `<img src="img/300w/orc-${this.idPersonnages}--weapon-${idArme}.png">`;
+        this.adressePng = `<img src="img/300w/orc-${this.idPersonnages}--weapon-${idArme}.png" alt="">`;
         this.arme = new Armes(idArme, puissance);
     }
 }

@@ -37,47 +37,7 @@ $(document).ready(() => {
 
     initialisationPartie();
 
-    const initialiationMouvements = () => {
-        $('.choix-possible').removeClass('choix-possible');
-
-        let activePlayerCell = $(`.joueur-${activePlayer}`).data();
-
-        for (let i = 1; i <= 3; i++) {
-            var negativeX = activePlayerCell.casex - i;
-            if ($(`[data-casex="${negativeX}"][data-casey="${activePlayerCell.casey}"]`).hasClass('wall') || $(`[data-casex="${negativeX}"][data-casey="${activePlayerCell.casey}"]`).is('[class*=joueur-]')) {
-                break;
-            } else {
-                $(`[data-casex="${negativeX}"][data-casey="${activePlayerCell.casey}"]`).addClass('choix-possible');
-            }
-        }
-
-        for (let i = 1; i <= 3; i++) {
-            var positiveX = activePlayerCell.casex + i;
-            if ($(`[data-casex="${positiveX}"][data-casey="${activePlayerCell.casey}"]`).hasClass('wall') || $(`[data-casex="${positiveX}"][data-casey="${activePlayerCell.casey}"]`).is('[class*=joueur-]')) {
-                break;
-            } else {
-                $(`[data-casex="${positiveX}"][data-casey="${activePlayerCell.casey}"]`).addClass('choix-possible');
-            }
-        }
-
-        for (let i = 1; i <= 3; i++) {
-            var negativeY = activePlayerCell.casey - i;
-            if ($(`[data-casex="${activePlayerCell.casex}"][data-casey="${negativeY}"]`).hasClass('wall') || $(`[data-casex="${activePlayerCell.casex}"][data-casey="${negativeY}"]`).is('[class*=joueur-]')) {
-                break;
-            } else {
-                $(`[data-casex="${activePlayerCell.casex}"][data-casey="${negativeY}"]`).addClass('choix-possible');
-            }
-        }
-
-        for (let i = 1; i <= 3; i++) {
-            var positiveY = activePlayerCell.casey + i;
-            if ($(`[data-casex="${activePlayerCell.casex}"][data-casey="${positiveY}"]`).hasClass('wall') || $(`[data-casex="${activePlayerCell.casex}"][data-casey="${positiveY}"]`).is('[class*=joueur-]')) {
-                break;
-            } else {
-                $(`[data-casex="${activePlayerCell.casex}"][data-casey="${positiveY}"]`).addClass('choix-possible');
-            }
-        }
-    }
+    
 
     const coordonneesAleatoires = () => {
         const coordonnees = [];
@@ -359,7 +319,7 @@ $(document).ready(() => {
     }
 
     $('.joueur-0').addClass('joueur-actif');
-    initialiationMouvements();
+    carteView.initialisationMouvements(activePlayer);
 
     $('.carte').on('click', '.choix-possible', function (e) {
 
@@ -419,7 +379,7 @@ $(document).ready(() => {
             $(`.joueur-${activePlayer + 1}-log .combat`).removeClass('hidden');
 
         } else {
-            initialiationMouvements();
+            carteView.initialisationMouvements(activePlayer);
         }
 
     });

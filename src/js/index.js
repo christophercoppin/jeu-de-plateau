@@ -25,7 +25,7 @@ $(document).ready(() => {
     const coordonneesArmes = [];
     const coordonneesPersonnages = [];
     const ensembleCoordonnees = [coordonneesMurs, coordonneesArmes, coordonneesPersonnages];
-
+    let nombreDeCases = 10;
     const joueur1 = new Joueur(1);
     const joueur2 = new Joueur(2);
     const joueurs = [joueur1, joueur2];
@@ -42,8 +42,8 @@ $(document).ready(() => {
     const coordonneesAleatoires = () => {
         const coordonnees = [];
 
-        const x = Math.floor(Math.random() * 10) + 1;
-        const y = Math.floor(Math.random() * 10) + 1;
+        const x = Math.floor(Math.random() * nombreDeCases) + 1;
+        const y = Math.floor(Math.random() * nombreDeCases) + 1;
 
         coordonnees.push(x);
         coordonnees.push(y);
@@ -99,10 +99,9 @@ $(document).ready(() => {
 
     assignerCoordonnees(nombreMur, coordonneesMurs);
 
+    
 
-    for (let i = 0; i < nombreMur; i++) {
-        $(`[data-casex="${coordonneesMurs[i][0]}"][data-casey="${coordonneesMurs[i][1]}"]`).html('<img src="img/300w/wall.png" alt="">').addClass('wall');
-    }
+    carteView.afficherMurs(coordonneesMurs);
 
     assignerCoordonnees(nombreArme, coordonneesArmes);
 

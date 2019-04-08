@@ -8,7 +8,7 @@ export const creationCarte = ( nombreDeCasesHorizontal = 10, nombreDeCasesVertic
 
     const carteElement = document.createElement('div');
     $(carteElement).addClass('carte');
-
+    
     for( let ligne = 1; ligne <= nombreDeCasesVertical; ligne++) {
         for( let colonne = 1; colonne <= nombreDeCasesHorizontal; colonne++) {
             const casesElement = document.createElement('div');
@@ -19,6 +19,11 @@ export const creationCarte = ( nombreDeCasesHorizontal = 10, nombreDeCasesVertic
     }
 
     $(carteElement).appendTo('.plateau');
+
+    if( nombreDeCasesHorizontal !== 10 || nombreDeCasesVertical !== 10) {
+        document.querySelector('.carte').style.gridTemplateRows = `repeat(${nombreDeCasesHorizontal}, ${100 / nombreDeCasesHorizontal}%)`;
+        document.querySelector('.carte').style.gridTemplateColumns = `repeat(${nombreDeCasesVertical}, minmax(${100 / nombreDeCasesHorizontal}%, ${100 / nombreDeCasesHorizontal}%))`;
+    }
 
 }
 
@@ -63,4 +68,10 @@ export const initialisationMouvements = (activePlayer) => {
         }
     }
 
+}
+
+export const afficherMurs = (coordonneesMurs) => {
+    for ( let coordonneesMur of coordonneesMurs) {
+        $(`[data-casex="${coordonneesMur[0]}"][data-casey="${coordonneesMur[1]}"]`).html('<img src="img/300w/wall.png" alt="">').addClass('wall');
+    }
 }

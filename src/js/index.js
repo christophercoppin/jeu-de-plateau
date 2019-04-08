@@ -12,6 +12,7 @@ if ('serviceWorker' in navigator) {
 }
 
 import * as carteView from './views/carteView';
+import * as personnagesView from './views/personnagesView';
 
 $(window).on('load', function () {
         $('.chargement').removeClass('chargement-en-cours');
@@ -37,8 +38,6 @@ $(document).ready(() => {
 
     initialisationPartie();
 
-    
-
     const coordonneesAleatoires = () => {
         const coordonnees = [];
 
@@ -51,8 +50,13 @@ $(document).ready(() => {
         return coordonnees;
     }
 
-    const nombreMur = Math.floor(Math.random() * 6) + 20;
-    const nombreArme = Math.floor(Math.random() * 3) + 3;
+
+    const random = (total, min) => {
+        return Math.floor(Math.random() * total) + min;
+    }
+    
+    const nombreMur = random(6, 20);
+    const nombreArme = random(3, 3);
 
 
     const assignerCoordonnees = (nombreCoordonnees, tableauCoordonnees) => {
@@ -95,31 +99,22 @@ $(document).ready(() => {
         }
     }
 
-
-
     assignerCoordonnees(nombreMur, coordonneesMurs);
-
-    
 
     carteView.afficherMurs(coordonneesMurs);
 
     assignerCoordonnees(nombreArme, coordonneesArmes);
 
+    carteView.afficherArmes(nombreArme, coordonneesArmes);
 
-    for (let i = 0; i < nombreArme; i++) {
-
-        const choixArme = Math.floor(Math.random() * 4) + 2;
-
-        $(`[data-casex="${coordonneesArmes[i][0]}"][data-casey="${coordonneesArmes[i][1]}"]`).html(`<img src="img/300w/weapon-${choixArme}.png" alt="">`).addClass('weapon').data('id-arme', choixArme);
-    }
 
     assignerCoordonnees(2, coordonneesPersonnages);
     const personnagesChoisi = [];
-    const personnageChoisi1 = Math.floor(Math.random() * 3) + 1;
-    let personnageChoisi2 = Math.floor(Math.random() * 3) + 1;
+    const personnageChoisi1 = random(3, 1);
+    let personnageChoisi2 = random(3, 1);
 
     while (personnageChoisi1 === personnageChoisi2) {
-        personnageChoisi2 = Math.floor(Math.random() * 3) + 1;
+        personnageChoisi2 = random(3, 1);
     }
 
     personnagesChoisi.push(personnageChoisi1);
@@ -127,12 +122,7 @@ $(document).ready(() => {
 
     for (let i = 0; i < 2; i++) {
 
-        let premierEssai = true;
-
         joueurs[i].assignerPosition(coordonneesPersonnages[i]);
-
-        
-
 
         joueurs[i].assignerPersonnage(personnagesChoisi[i]);
 
@@ -154,16 +144,8 @@ $(document).ready(() => {
         }
 
         joueurs[i].assignerArme(1);
-
-        $(`.joueur-${i + 1}-log h2`).text(joueurs[i].personnage.nom);
-        $(`.joueur-${i + 1}-log .perso`).css('background-image', `url("img/orc-${personnagesChoisi[i]}--weapon-1-attaque.png")`);
-        console.log(personnagesChoisi[i]);
-        console.log(`.joueur-${i + 1}-log .perso`);
-
-        $(`.joueur-${i + 1}-log progress`).attr('value', joueurs[i].pointsDeVie);
-        $(`.joueur-${i + 1}-log .pv-bar span`).text(`${joueurs[i].pointsDeVie} pv`);
-
-        $(`[data-casex="${coordonneesPersonnages[i][0]}"][data-casey="${coordonneesPersonnages[i][1]}"]`).html(`<img src="img/300w/orc-${personnagesChoisi[i]}--weapon-1.png" alt="">`).addClass(`joueur-${i}`);
+        carteView.afficherPersonnage(coordonneesPersonnages[i], personnagesChoisi[i], i);
+        personnagesView.initialiserAffichagePersonnage(joueurs, personnagesChoisi, i);
     }
 
     const positionPersonnages = () => {
@@ -171,110 +153,21 @@ $(document).ready(() => {
         const positionJoueur1Y = joueurs[0].position[1];
         const positionJoueur2X = joueurs[1].position[0];
         const positionJoueur2Y = joueurs[1].position[1];
-        let personnagesProches;
 
         console.log(joueurs[0].position);
         console.log(joueurs[1].position);
 
         if ((positionJoueur1X === positionJoueur2X && (positionJoueur1Y === positionJoueur2Y + 1 || positionJoueur1Y === positionJoueur2Y - 1)) || (positionJoueur1Y === positionJoueur2Y && (positionJoueur1X === positionJoueur2X + 1 || positionJoueur1X === positionJoueur2X - 1)) || (positionJoueur1X === positionJoueur2X + 1 && (positionJoueur1Y === positionJoueur2Y + 1 || positionJoueur1Y === positionJoueur2Y - 1)) || (positionJoueur1X === positionJoueur2X - 1 && (positionJoueur1Y === positionJoueur2Y + 1 || positionJoueur1Y === positionJoueur2Y - 1))) {
-            console.log('les personnages sont trop proches');
-            return personnagesProches = true;
-        } else {
-            console.log('les personnages ne sont pas trop proches');
-        }
-
-        controleCases(positionJoueur1X, positionJoueur1Y);
-
-        let armesTrouve;
-        let personnageTrouve;
-
-        for (const arme of coordonneesArmes) {
-            if($(`[data-casex="${arme[0]}"][data-casey="${arme[1]}"]`).hasClass('checked')) {
-                armesTrouve = true;
-            } else {
-                armesTrouve = false;
-                break;
-            }
-        }
-
-        if($(`[data-casex="${positionJoueur2X}"][data-casey="${positionJoueur2Y}"]`).hasClass('checked')) {
-            personnageTrouve = true;
-        } else {
-            personnageTrouve = false;
-        }
-
-        console.log(armesTrouve);
-        console.log(personnageTrouve);
-
-        if(armesTrouve && personnageTrouve) {
-            $('.checked').removeClass('checked');
-            return personnagesProches = false; 
-        } else {
-
-            $('.checked').removeClass('checked');
             return personnagesProches = true;
         }
+
+        carteView.controleCases(positionJoueur1X, positionJoueur1Y);
+
+        return carteView.controleAccessible(coordonneesArmes, positionJoueur2X, positionJoueur2Y);
         
     }
-
-    const controleCases = (positionX, positionY) => {
-
-        const positionXAvant = parseInt(positionX) - 1;
-        const positionXApres = parseInt(positionX) + 1;
-        const positionYAvant = parseInt(positionY) - 1;
-        const positionYApres = parseInt(positionY) + 1;
-
-        $(`[data-casex="${positionX}"][data-casey="${positionY}"]`).addClass('checked');
-
-        const positionTop = $(`[data-casex="${positionXAvant}"][data-casey="${positionY}"]`);
-        const positionBottom = $(`[data-casex="${positionXApres}"][data-casey="${positionY}"]`);
-        const positionLeft = $(`[data-casex="${positionX}"][data-casey="${positionYAvant}"]`);
-        const positionRight = $(`[data-casex="${positionX}"][data-casey="${positionYApres}"]`);
-
-            if($(positionTop).length !== 0 && !$(positionTop).hasClass('checked')) {
-
-                if($(positionTop).hasClass('wall')) {
-                    console.log(positionTop);
-                } else {
-                    console.log('Il y a une case libre au dessus de la case ' + positionX + ',' + positionY);
-                    controleCases($(positionTop).attr('data-casex'), $(positionTop).attr('data-casey'));
-                }
-            }
-            
-            if($(positionBottom).length !== 0 && !$(positionBottom).hasClass('checked')) {
-
-                if($(positionBottom).hasClass('wall')) {
-                    console.log(positionBottom);
-                } else {
-                    console.log('Il y a une case libre au dessous de la case ' + positionX + ',' + positionY);
-                    controleCases($(positionBottom).attr('data-casex'), $(positionBottom).attr('data-casey'));
-                }
-            }
-
-            if($(positionLeft).length !== 0 && !$(positionLeft).hasClass('checked')) {
-
-                if($(positionLeft).hasClass('wall')) {
-                    console.log(positionLeft);
-                } else {
-                    console.log('Il y a une case libre a gauche de la case ' + positionX + ',' + positionY);
-                    controleCases($(positionLeft).attr('data-casex'), $(positionLeft).attr('data-casey'));
-            }
-        }
-
-            if($(positionRight).length !== 0 && !$(positionRight).hasClass('checked')) {
-
-                if($(positionRight).hasClass('wall')) {
-                    console.log(positionRight);
-                } else {
-                    console.log('Il y a une case libre a droite de la case ' + positionX + ',' + positionY);
-                    controleCases($(positionRight).attr('data-casex'), $(positionRight).attr('data-casey'));
-            }
-        }
-    }
-
     
     while(positionPersonnages()) {
-
 
         coordonneesPersonnages.length = 0;
         assignerCoordonnees(2, coordonneesPersonnages);
@@ -283,41 +176,17 @@ $(document).ready(() => {
             joueurs[i].assignerPosition(coordonneesPersonnages[i]);
             console.log('La position des personnages à été modifié');
 
-            $(`.joueur-${i}`).empty().removeClass(`joueur-${i}`)
-
-            $(`[data-casex="${coordonneesPersonnages[i][0]}"][data-casey="${coordonneesPersonnages[i][1]}"]`).html(`<img src="img/300w/orc-${personnagesChoisi[i]}--weapon-1.png" alt="">`).addClass(`joueur-${i}`);
+            carteView.afficherPersonnage(coordonneesPersonnages[i], personnagesChoisi[i], i);
         }
 
         coordonneesArmes.length = 0;
         assignerCoordonnees(nombreArme, coordonneesArmes);
-        console.log('nombre arme' + nombreArme);
-        $('.weapon').empty().removeClass('weapon');
-
-        for (let i = 0; i < nombreArme; i++) {
-            
-    
-            const choixArme = Math.floor(Math.random() * 4) + 2;
-    
-            $(`[data-casex="${coordonneesArmes[i][0]}"][data-casey="${coordonneesArmes[i][1]}"]`).html(`<img src="img/300w/weapon-${choixArme}.png" alt="">`).addClass('weapon').data('id-arme', choixArme);
-        } 
-
-    console.log(coordonneesPersonnages);
+        carteView.afficherArmes(nombreArme, coordonneesAleatoires);
     }
 
-    const posJoueurActif = [$('.joueur-0').data().casex, $('.joueur-0').data().casey];
-    const posAdversaire = [$('.joueur-1').data().casex, $('.joueur-1').data().casey];
+    carteView.definirDirectionPersonnage();
 
-    if (posJoueurActif[1] > posAdversaire[1] || (posJoueurActif[1] === posAdversaire[1] && posJoueurActif[0] > posAdversaire[0])) {
-        console.log('tu dois regarder a gauche');
-        console.log(`${posJoueurActif[1]} <= ${posAdversaire[1]}`);
-        $('.joueur-0').addClass('direction-gauche');
-        $(`.joueur-1`).removeClass('direction-gauche');
-    } else {
-        $('.joueur-0').removeClass('direction-gauche');
-        $('.joueur-1').addClass('direction-gauche');
-    }
-
-    $('.joueur-0').addClass('joueur-actif');
+    
     carteView.initialisationMouvements(activePlayer);
 
     $('.carte').on('click', '.choix-possible', function (e) {
@@ -350,18 +219,7 @@ $(document).ready(() => {
         this.innerHTML = joueurs[activePlayer].personnage.adressePng;
         joueurs[activePlayer].assignerPosition([$(this).data().casex, $(this).data().casey]);
 
-        const posJoueurActif = [$('.joueur-0').data().casex, $('.joueur-0').data().casey];
-        const posAdversaire = [$('.joueur-1').data().casex, $('.joueur-1').data().casey];
-
-        if (posJoueurActif[1] > posAdversaire[1] || (posJoueurActif[1] === posAdversaire[1] && posJoueurActif[0] > posAdversaire[0])) {
-            console.log('tu dois regarder a gauche');
-            console.log(`${posJoueurActif[1]} <= ${posAdversaire[1]}`);
-            $('.joueur-0').addClass('direction-gauche');
-            $(`.joueur-1`).removeClass('direction-gauche');
-        } else {
-            $('.joueur-0').removeClass('direction-gauche');
-            $('.joueur-1').addClass('direction-gauche');
-        }
+        carteView.definirDirectionPersonnage();
 
 
         window.getSelection().removeAllRanges();

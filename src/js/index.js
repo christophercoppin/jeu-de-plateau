@@ -11,41 +11,31 @@ if ('serviceWorker' in navigator) {
     });
 }
 
-
-let activePlayer = 0;
-/* const persoJoueur1 = `<img src="img/300w/orc-1--weapon-2.png" alt="">`;
-const persoJoueur2 = `<img src="img/300w/orc-2--weapon-1.png" alt="">`; */
-const coordonneesMurs = [];
-const coordonneesArmes = [];
-const coordonneesPersonnages = [];
-const ensembleCoordonnees = [coordonneesMurs, coordonneesArmes, coordonneesPersonnages];
-
-const joueur1 = new Joueur(1);
-const joueur2 = new Joueur(2);
-const joueurs = [joueur1, joueur2];
-
-/* if ('serviceWorker' in navigator) {
-    window.addEventListener('load', function() {
-      navigator.serviceWorker.register('/sw.js').then(function(registration) {
-        // Registration was successful
-        console.log('ServiceWorker registration successful with scope: ', registration.scope);
-      }, function(err) {
-        // registration failed :(
-        console.log('ServiceWorker registration failed: ', err);
-      });
-    });
-  } */
-
-
-
+import * as carteView from './views/carteView';
 
 $(window).on('load', function () {
         $('.chargement').removeClass('chargement-en-cours');
-        console.log('Chargement termine');;
-
+        console.log('Chargement termine');
 });
 
 $(document).ready(() => {
+
+    let activePlayer = 0;
+    const coordonneesMurs = [];
+    const coordonneesArmes = [];
+    const coordonneesPersonnages = [];
+    const ensembleCoordonnees = [coordonneesMurs, coordonneesArmes, coordonneesPersonnages];
+
+    const joueur1 = new Joueur(1);
+    const joueur2 = new Joueur(2);
+    const joueurs = [joueur1, joueur2];
+
+    carteView.creationCarte();
+    const initialisationPartie = () => {
+        
+    }
+
+    initialisationPartie();
 
     const initialiationMouvements = () => {
         $('.choix-possible').removeClass('choix-possible');
@@ -207,9 +197,6 @@ $(document).ready(() => {
         joueurs[i].assignerArme(1);
 
         $(`.joueur-${i + 1}-log h2`).text(joueurs[i].personnage.nom);
-
-        /* $(`.orc-${personnagesChoisi[i]}--svg-weapon`).html($(`#weapon-1`).html());
-        $(`.joueur-${i + 1}-log use`).attr('xlink:href', `#orc-${personnagesChoisi[i]}`); */
         $(`.joueur-${i + 1}-log .perso`).css('background-image', `url("img/orc-${personnagesChoisi[i]}--weapon-1-attaque.png")`);
         console.log(personnagesChoisi[i]);
         console.log(`.joueur-${i + 1}-log .perso`);
@@ -373,7 +360,7 @@ $(document).ready(() => {
     $('.joueur-0').addClass('joueur-actif');
     initialiationMouvements();
 
-    $('.plateau').on('click', '.choix-possible', function (e) {
+    $('.carte').on('click', '.choix-possible', function (e) {
 
 
         let adversaire = activePlayer === 1 ? adversaire = 0 : adversaire = 1;

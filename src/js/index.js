@@ -195,7 +195,7 @@ $(document).ready(() => {
         
 
 
-        assignerArme(activePlayer);
+        carteView.assignerArme($(this), activePlayer, joueurs[activePlayer]);
 
 
 

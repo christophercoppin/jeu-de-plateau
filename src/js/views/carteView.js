@@ -191,21 +191,21 @@ export const afficherPersonnage = (coordonneesPersonnage, personnageChoisi, i) =
     $(`[data-casex="${coordonneesPersonnage[0]}"][data-casey="${coordonneesPersonnage[1]}"]`).html(`<img src="img/300w/orc-${personnageChoisi}--weapon-1.png" alt="">`).addClass(`joueur-${i}`);
 }
 
-export const assignerArme = (activePlayer) => {
-    if (joueurs[activePlayer].idAncienneArme !== '') {
-        $(`.joueur-actif`).html(`<img src="img/300w/weapon-${joueurs[activePlayer].idAncienneArme}.png" alt="">`).addClass('weapon').data('id-arme', joueurs[activePlayer].idAncienneArme);
+export const assignerArme = (caseActive, activePlayer, joueur) => {
+    if (joueur.idAncienneArme !== '') {
+        $(`.joueur-actif`).html(`<img src="img/300w/weapon-${joueur.idAncienneArme}.png" alt="">`).addClass('weapon').data('id-arme', joueur.idAncienneArme);
 
-        joueurs[activePlayer].idAncienneArme = '';
+        joueur.idAncienneArme = '';
     }
     
     $('.joueur-actif').removeClass(`joueur-actif joueur-${activePlayer} direction-gauche direction-droite`);
 
-    if ($(this).hasClass('weapon')) {
-        joueurs[activePlayer].assignerArme($(this).data('id-arme'), joueurs[activePlayer].personnage.arme.idArme);
+    if ($(caseActive).hasClass('weapon')) {
+        joueur.assignerArme($(caseActive).data('id-arme'), joueur.personnage.arme.idArme);
 
-        $(`.joueur-${activePlayer + 1}-log .perso`).css('background-image', `url("img/orc-${joueurs[activePlayer].personnage.idPersonnages}--weapon-${joueurs[activePlayer].personnage.arme.idArme}-attaque.png")`);
+        $(`.joueur-${activePlayer + 1}-log .perso`).css('background-image', `url("img/orc-${joueur.personnage.idPersonnages}--weapon-${joueur.personnage.arme.idArme}-attaque.png")`);
 
-        $(this).removeClass('weapon');
+        $(caseActive).removeClass('weapon');
     }
 }
 

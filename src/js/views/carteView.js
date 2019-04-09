@@ -209,6 +209,12 @@ export const assignerArme = (caseActive, activePlayer, joueur) => {
     }
 }
 
+export const assignerCaseJoueur = (caseActive, activePlayer, joueur) => {
+
+    $(caseActive).addClass(`joueur-${activePlayer}`).html(joueur.personnage.adressePng);
+    
+}
+
 const random = (total, min) => {
     return Math.floor(Math.random() * total) + min;
 }

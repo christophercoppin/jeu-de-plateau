@@ -194,8 +194,7 @@ $(document).ready(() => {
 
         carteView.assignerArme($(this), activePlayer, joueurs[activePlayer]);
 
-        $(this).addClass(`joueur-${activePlayer}`);
-        this.innerHTML = joueurs[activePlayer].personnage.adressePng;
+        carteView.assignerCaseJoueur($(this), activePlayer, joueurs[activePlayer]);
         joueurs[activePlayer].assignerPosition([$(this).data().casex, $(this).data().casey]);
 
         carteView.definirDirectionPersonnage();
@@ -217,8 +216,6 @@ $(document).ready(() => {
         }
 
     });
-
-    
 
     $('.attaque').on('click', () => {
         let adversaire = activePlayer === 1 ? adversaire = 0 : adversaire = 1;

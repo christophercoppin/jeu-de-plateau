@@ -191,23 +191,11 @@ $(document).ready(() => {
         let adversaire = activePlayer === 1 ? adversaire = 0 : adversaire = 1;
         $('.joueur-actif').empty();
 
-        if (joueurs[activePlayer].idAncienneArme !== '') {
-            $(`.joueur-actif`).html(`<img src="img/300w/weapon-${joueurs[activePlayer].idAncienneArme}.png" alt="">`).addClass('weapon').data('id-arme', joueurs[activePlayer].idAncienneArme);
 
-            joueurs[activePlayer].idAncienneArme = '';
-        }
-
-        $('.joueur-actif').removeClass(`joueur-actif joueur-${activePlayer} direction-gauche direction-droite`);
-
-        if ($(this).hasClass('weapon')) {
-            joueurs[activePlayer].assignerArme($(this).data('id-arme'), joueurs[activePlayer].personnage.arme.idArme);
-
-            $(`.joueur-${activePlayer + 1}-log .perso`).css('background-image', `url("img/orc-${joueurs[activePlayer].personnage.idPersonnages}--weapon-${joueurs[activePlayer].personnage.arme.idArme}-attaque.png")`);
-
-            $(this).removeClass('weapon');
-        }
+        
 
 
+        assignerArme(activePlayer);
 
 
 

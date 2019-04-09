@@ -13,6 +13,7 @@ if ('serviceWorker' in navigator) {
 
 import * as carteView from './views/carteView';
 import * as personnagesView from './views/personnagesView';
+import * as interfaceView from './views/interfaceView';
 
 $(window).on('load', function () {
         $('.chargement').removeClass('chargement-en-cours');
@@ -217,12 +218,7 @@ $(document).ready(() => {
 
     });
 
-    const reduirePointsDeVie = (adversaire, pointsDeVie, i, timeout) => {
-
-        setTimeout(function () {
-            $(`.joueur-${adversaire + 1}-log .pv-bar span`).text(`${pointsDeVie - i} pv`);
-        }, timeout * i);
-    }
+    
 
     $('.attaque').on('click', () => {
         let adversaire = activePlayer === 1 ? adversaire = 0 : adversaire = 1;
@@ -279,7 +275,7 @@ $(document).ready(() => {
     
             setTimeout(() => {
                 for(let i = 1; i <= degats; i++) {
-                    reduirePointsDeVie(adversaire, pointsDeVie, i, timeout);
+                    interfaceView.reduirePointsDeVie(adversaire, pointsDeVie, i, timeout);
                 }
         
                 $(`.joueur-${adversaire + 1}-log progress`).attr('value', joueurs[adversaire].pointsDeVie);

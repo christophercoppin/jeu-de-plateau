@@ -191,13 +191,7 @@ $(document).ready(() => {
         let adversaire = activePlayer === 1 ? adversaire = 0 : adversaire = 1;
         $('.joueur-actif').empty();
 
-
-        
-
-
         carteView.assignerArme($(this), activePlayer, joueurs[activePlayer]);
-
-
 
         $(this).addClass(`joueur-${activePlayer}`);
         this.innerHTML = joueurs[activePlayer].personnage.adressePng;
@@ -210,8 +204,6 @@ $(document).ready(() => {
 
         activePlayer === 1 ? activePlayer = 0 : activePlayer = 1;
         $(`.joueur-${activePlayer}`).addClass('joueur-actif');
-
-
 
         if (joueurs[activePlayer].estProche([$(this).data().casex, $(this).data().casey])) {
             $('.choix-possible').removeClass('choix-possible');
@@ -389,14 +381,3 @@ $(document).ready(() => {
 
 });
 
-jQuery.fn.rotate = function(degrees) {
-    $(this).css({'-webkit-transform' : 'rotate('+ degrees +'deg)', 
-        '-moz-transform' : 'rotate('+ degrees +'deg)',
-        '-ms-transform' : 'rotate('+ degrees +'deg)', 
-        'transform' : 'rotate('+ degrees +'deg)',
-        '-webkit-transition' : '1s ease-out',
-        '-moz-transition' : '1s ease-out',
-        '-o-transition' : '1s ease-out'});
-
-    return $(this);
-};

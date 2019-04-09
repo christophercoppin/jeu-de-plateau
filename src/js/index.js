@@ -28,8 +28,8 @@ $(document).ready(() => {
     const coordonneesPersonnages = [];
     const ensembleCoordonnees = [coordonneesMurs, coordonneesArmes, coordonneesPersonnages];
     let nombreDeCases = 10;
-    const joueur1 = new Joueur(1);
-    const joueur2 = new Joueur(2);
+    const joueur1 = new Joueur(0);
+    const joueur2 = new Joueur(1);
     const joueurs = [joueur1, joueur2];
 
     carteView.creationCarte();
@@ -215,17 +215,8 @@ $(document).ready(() => {
 
     $('.attaque').on('click', () => {
         let adversaire = switchPlayer(activePlayer);
-        
-            $(`.joueur-${adversaire + 1}-log .perso`).removeClass('defense');
-    
-            
-    
-            $(`.joueur-${activePlayer + 1}-log .perso`).addClass('attaque');
-            setTimeout(() => {
-                $(`.joueur-${activePlayer + 1}-log .perso`).removeClass('attaque');
-            }, 2000); 
-    
-            
+
+            personnagesView.animationAttaque(adversaire, activePlayer);
     
             const pointsDeVie = joueurs[adversaire].pointsDeVie;
             let degats = joueurs[activePlayer].personnage.arme.puissance;
@@ -236,8 +227,6 @@ $(document).ready(() => {
                 } else {
                     degats = degats / 2;
                 }
-    
-                
     
                 joueurs[adversaire].pointsDeVie = pointsDeVie - degats;
                 joueurs[adversaire].defense = !joueurs[adversaire].defense;
@@ -254,8 +243,6 @@ $(document).ready(() => {
     
                 joueurs[adversaire].pointsDeVie -= degats;
 
-                
-    
             }
     
             let timeout;
@@ -268,10 +255,8 @@ $(document).ready(() => {
     
             setTimeout(() => {
                 for(let i = 1; i <= degats; i++) {
-                    interfaceView.reduirePointsDeVie(adversaire, pointsDeVie, i, timeout);
+                    interfaceView.reduirePointsDeVie(joueurs[adversaire], pointsDeVie, i, timeout);
                 }
-        
-                $(`.joueur-${adversaire + 1}-log progress`).attr('value', joueurs[adversaire].pointsDeVie);
             }, 1000);
             
     

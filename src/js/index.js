@@ -215,6 +215,7 @@ $(document).ready(() => {
 
     $('.attaque').on('click', () => {
         let adversaire = switchPlayer(activePlayer);
+        console.log(joueurs[adversaire].defense);
 
             personnagesView.animationAttaque(adversaire, activePlayer);
     
@@ -229,7 +230,7 @@ $(document).ready(() => {
                 }
     
                 joueurs[adversaire].pointsDeVie = pointsDeVie - degats;
-                joueurs[adversaire].defense = !joueurs[adversaire].defense;
+                joueurs[adversaire].defense = false;
     
                 if (joueurs[adversaire].pointsDeVie <= 0) {
                     joueurs[adversaire].pointsDeVie = 0;
@@ -258,65 +259,36 @@ $(document).ready(() => {
                     interfaceView.reduirePointsDeVie(joueurs[adversaire], pointsDeVie, i, timeout);
                 }
             }, 1000);
-            
     
             if (joueurs[adversaire].pointsDeVie === 0) {
 
-                $('.fin-jeu').text(`${joueurs[activePlayer].personnage.nom} Gagne!!`);
-                $('.fin-jeu').toggleClass('hidden');
-    
-                $('.fin-jeu').animate({
-                    fontSize: "70px",
-                    opacity: "1"
-                }, 700);
-    
-                const animationVictoire = () => {
-    
-                    for (let i = 0; i < 6; i++) {
-    
-                        $('.fin-jeu').animate({
-                            fontSize: "30px"
-                        }, 500).animate({
-                            fontSize: "50px"
-                        }, 500);
-
-                    }
-    
-    
-                    $('.reload').removeClass('hidden');
+                interfaceView.animationVictoire(activePlayer, joueurs).then(() => {                  
                     $('.reload__btn').on('click', () => {
                         location.reload(false);
                     });
-                    
-                }
+                });
+
                 setTimeout(() => {
-                    $(`.joueur-${activePlayer + 1}-log .perso`).css('background-image', `url("img/orc-${joueurs[activePlayer].personnage.idPersonnages}--gagne.png")`);
-                $(`.joueur-${activePlayer + 1}-log .perso`).addClass('gagne');
-    
-    
-                animationVictoire();
+                    personnagesView.animePersonnage(joueurs, activePlayer, 'gagne');
                 }, 2010);
 
                 setTimeout(() => {
-                    $(`.joueur-${adversaire + 1}-log .perso`).css('background-image', `url("img/orc-${joueurs[adversaire].personnage.idPersonnages}--mort.png")`);
-                    $(`.joueur-${adversaire + 1}-log .perso`).addClass('mort');
+                    personnagesView.animePersonnage(joueurs, adversaire, 'mort');
                 }, 1000);
-                
-    
-                $(`.joueur-${activePlayer + 1}-log .combat`).toggleClass('hidden');
+
+                interfaceView.visibiliteCommandes(activePlayer);
             } else {
     
                 setTimeout(() => {
-                    $(`.joueur-${adversaire + 1}-log .perso`).css('background-image', `url("img/orc-${joueurs[adversaire].personnage.idPersonnages}--degats.png")`);
-                    $(`.joueur-${adversaire + 1}-log .perso`).addClass('degats');
+                    personnagesView.animePersonnage(joueurs, adversaire, 'degats');
+                    
                     setTimeout(() => {
-                        $(`.joueur-${adversaire + 1}-log .perso`).removeClass('degats');
-                        $(`.joueur-${adversaire + 1}-log .perso`).css('background-image', `url("img/orc-${joueurs[adversaire].personnage.idPersonnages}--weapon-${joueurs[adversaire].personnage.arme.idArme}-attaque.png")`);
+                        personnagesView.etatInitialPersonnage(joueurs, adversaire);
                     }, 2010);
                 }, 1000);
                 setTimeout(() => {
-                    $(`.joueur-${activePlayer + 1}-log .combat`).toggleClass('hidden');
-                    $(`.joueur-${adversaire + 1}-log .combat`).toggleClass('hidden');
+                    interfaceView.visibiliteCommandes(activePlayer);
+                    interfaceView.visibiliteCommandes(adversaire);
         
                     activePlayer = switchPlayer(activePlayer);
                 }, 2010);
@@ -329,19 +301,17 @@ $(document).ready(() => {
 
         let adversaire = switchPlayer(activePlayer);
 
-        $(`.joueur-${adversaire + 1}-log .perso`).removeClass('defense');
+        if ( joueurs[adversaire].defense) {
+            joueurs[adversaire].defense = false;
+        }
 
-        $(`.joueur-${activePlayer + 1}-log .perso`).css('background-image', `url("img/orc-${joueurs[activePlayer].personnage.idPersonnages}--defense.png")`);
-        $(`.joueur-${activePlayer + 1}-log .perso`).addClass('defense');
-        $(`.joueur-${adversaire + 1}-log .perso`).css('background-image', `url("img/orc-${joueurs[adversaire].personnage.idPersonnages}--weapon-${joueurs[adversaire].personnage.arme.idArme}-attaque.png")`);
+        personnagesView.animePersonnage(joueurs, activePlayer, 'defense');
+        personnagesView.etatInitialPersonnage(joueurs, adversaire);
 
+        joueurs[activePlayer].defense = true;
 
-        
-
-        joueurs[activePlayer].defense = !joueurs[activePlayer].defense;
-
-        $(`.joueur-${activePlayer + 1}-log .combat`).toggleClass('hidden');
-        $(`.joueur-${adversaire + 1}-log .combat`).toggleClass('hidden');
+        interfaceView.visibiliteCommandes(activePlayer);
+        interfaceView.visibiliteCommandes(adversaire);
 
         activePlayer = switchPlayer(activePlayer);
     });

@@ -52,10 +52,13 @@ h2 {
 
     }
 
-    .plateau .carte {
-        width: 90vh;
+    .plateau {
+      position: relative;
+      width: 90vh;
         height: 90vh;
         max-height: 58vw;
+      & .carte {
+
         background-color: $color-yellow-dark;
         display: grid;
         grid-template-columns: repeat(10, 10%);
@@ -86,6 +89,7 @@ h2 {
         
         
     }
+  }
     
     .joueur-2-log {
       flex:1; 

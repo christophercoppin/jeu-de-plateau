@@ -212,7 +212,12 @@ export const assignerArme = (caseActive, activePlayer, joueur) => {
 export const assignerCaseJoueur = (caseActive, activePlayer, joueur) => {
 
     $(caseActive).addClass(`joueur-${activePlayer}`).html(joueur.personnage.adressePng);
-    
+
+}
+
+export const turnToFightMode = () => {
+    $('.choix-possible').removeClass('choix-possible');
+    console.log('cest la guerre!!!');
 }
 
 const random = (total, min) => {

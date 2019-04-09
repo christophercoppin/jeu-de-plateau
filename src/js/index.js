@@ -197,17 +197,15 @@ $(document).ready(() => {
 
         carteView.definirDirectionPersonnage();
 
-
         window.getSelection().removeAllRanges();
 
         activePlayer = switchPlayer(activePlayer);
         $(`.joueur-${activePlayer}`).addClass('joueur-actif');
 
         if (joueurs[activePlayer].estProche([$(this).data().casex, $(this).data().casey])) {
-            $('.choix-possible').removeClass('choix-possible');
-            console.log('cest la guerre!!!');
 
-            $(`.joueur-${activePlayer + 1}-log .combat`).removeClass('hidden');
+            carteView.turnToFightMode();
+            interfaceView.turnToFightMode(activePlayer);
 
         } else {
             carteView.initialisationMouvements(activePlayer);

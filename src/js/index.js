@@ -188,8 +188,6 @@ $(document).ready(() => {
 
     $('.carte').on('click', '.choix-possible', function (e) {
 
-
-        let adversaire = activePlayer === 1 ? adversaire = 0 : adversaire = 1;
         $('.joueur-actif').empty();
 
         carteView.assignerArme($(this), activePlayer, joueurs[activePlayer]);
@@ -202,7 +200,7 @@ $(document).ready(() => {
 
         window.getSelection().removeAllRanges();
 
-        activePlayer === 1 ? activePlayer = 0 : activePlayer = 1;
+        activePlayer = switchPlayer(activePlayer);
         $(`.joueur-${activePlayer}`).addClass('joueur-actif');
 
         if (joueurs[activePlayer].estProche([$(this).data().casex, $(this).data().casey])) {
@@ -218,7 +216,7 @@ $(document).ready(() => {
     });
 
     $('.attaque').on('click', () => {
-        let adversaire = activePlayer === 1 ? adversaire = 0 : adversaire = 1;
+        let adversaire = switchPlayer(activePlayer);
         
             $(`.joueur-${adversaire + 1}-log .perso`).removeClass('defense');
     
@@ -312,7 +310,6 @@ $(document).ready(() => {
                     $(`.joueur-${activePlayer + 1}-log .perso`).css('background-image', `url("img/orc-${joueurs[activePlayer].personnage.idPersonnages}--gagne.png")`);
                 $(`.joueur-${activePlayer + 1}-log .perso`).addClass('gagne');
     
-                 
     
                 animationVictoire();
                 }, 2010);
@@ -322,8 +319,6 @@ $(document).ready(() => {
                     $(`.joueur-${adversaire + 1}-log .perso`).addClass('mort');
                 }, 1000);
                 
-                
-    
     
                 $(`.joueur-${activePlayer + 1}-log .combat`).toggleClass('hidden');
             } else {
@@ -340,20 +335,16 @@ $(document).ready(() => {
                     $(`.joueur-${activePlayer + 1}-log .combat`).toggleClass('hidden');
                     $(`.joueur-${adversaire + 1}-log .combat`).toggleClass('hidden');
         
-                    activePlayer === 1 ? activePlayer = 0 : activePlayer = 1;
+                    activePlayer = switchPlayer(activePlayer);
                 }, 2010);
                 
             }
-    
-    
         
     });
-        
-
 
     $('.defense').on('click', () => {
 
-        let adversaire = activePlayer === 1 ? adversaire = 0 : adversaire = 1;
+        let adversaire = switchPlayer(activePlayer);
 
         $(`.joueur-${adversaire + 1}-log .perso`).removeClass('defense');
 
@@ -369,8 +360,13 @@ $(document).ready(() => {
         $(`.joueur-${activePlayer + 1}-log .combat`).toggleClass('hidden');
         $(`.joueur-${adversaire + 1}-log .combat`).toggleClass('hidden');
 
-        activePlayer === 1 ? activePlayer = 0 : activePlayer = 1;
+        activePlayer = switchPlayer(activePlayer);
     });
+
+    const switchPlayer = (active) => {
+        active === 1 ? active = 0 : active = 1;
+        return active;
+    }
 
 });
 

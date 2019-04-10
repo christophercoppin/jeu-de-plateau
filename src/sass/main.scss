@@ -11,6 +11,8 @@ $color-yellow-dark: #E2C43F;
     box-sizing: inherit;
 }
 
+
+
 html {
     // This define what 1rem is
     font-size: 62.5%;
@@ -27,8 +29,10 @@ body {
     overflow: hidden;
 }
 
+
+
 .plateau img {
-    width: 100%; 
+    width: 100%;
 
     &.weapon {
         width: 80%;
@@ -39,26 +43,27 @@ body {
 
 
 h2 {
-    padding: 2% 0;
+    padding: 2rem 0;
 }
 
 .container {
     display: flex;
-    
+    justify-content: space-around;
     height: 100%;
 
     .joueur-1-log { 
-        flex: 1;
-
+      margin-right: 2rem;
     }
 
     .plateau {
+      
       position: relative;
       width: 90vh;
         height: 90vh;
         max-height: 58vw;
       & .carte {
-
+        width: 100%; 
+        height: 100%; 
         background-color: $color-yellow-dark;
         display: grid;
         grid-template-columns: repeat(10, 10%);
@@ -92,11 +97,12 @@ h2 {
   }
     
     .joueur-2-log {
-      flex:1; 
+      margin-left: 2rem;
         & .perso__wrapper{
           transform: scaleX(-1);
         }
     }
+
 }
 
 
@@ -119,42 +125,26 @@ h2 {
   background-repeat: no-repeat;
 
   &.attaque {
-    /* animation-name: attaque-ligne-1, attaque-ligne-2; */
     animation-name: animation-2-lignes;
-    /* animation-delay: 0s, 1s; */
-    /* animation-duration: 1s, 1s; */
     animation-duration: 2s;
-    /* animation-timing-function: steps(15), steps(15); */
     animation-timing-function: steps(15);
   }
 
   &.degats {
-    /* animation-name: attaque-ligne-1, attaque-ligne-2; */
     animation-name: animation-2-lignes;
-    /* animation-delay: 0s, 1s; */
-    /* animation-duration: 1s, 1s; */
     animation-duration: 2s;
-    /* animation-timing-function: steps(15), steps(15); */
     animation-timing-function: steps(15);
   }
 
   &.defense {
-    /* animation-name: attaque-ligne-1, attaque-ligne-2; */
     animation-name: animation-2-lignes;
-    /* animation-delay: 0s, 1s; */
-    /* animation-duration: 1s, 1s; */
     animation-duration: 2s;
-    /* animation-timing-function: steps(15), steps(15); */
     animation-timing-function: steps(15);
   }
 
   &.gagne {
     height: 300%;
     background-image: url('/img/orc-1--gagne.png');
-    /* animation-name: victoire-ligne-1, victoire-ligne-2, victoire-ligne-3 ;
-    animation-delay: 0s, 1s, 2s;
-    animation-duration: 1s, 1s, 1s;
-    animation-timing-function: steps(15), steps(15), steps(15); */
 
     animation-name: animation-3-lignes;
     animation-duration: 3s;
@@ -163,12 +153,8 @@ h2 {
   }
 
   &.mort {
-    /* animation-name: attaque-ligne-1, attaque-ligne-2; */
     animation-name: animation-2-lignes;
-    /* animation-delay: 0s, 1s; */
-    /* animation-duration: 1s, 1s; */
     animation-duration: 2s;
-    /* animation-timing-function: steps(15), steps(15); */
     animation-timing-function: steps(15);
     transform: translate(-93.75%, -50%  );  
   }
@@ -183,23 +169,38 @@ h2 {
 
 }
 
-@media screen and (max-width:1100px){
+@media screen and (max-width:1200px){
   .perso__wrapper {
     width: 200px;
     height: 200px;
   }
+
+  .joueur-1-log,
+  .joueur-2-log {
+    width: 250px;
+  }
 }
 
-@media screen and (max-width:900px){
+@media screen and (max-width:1045px){
   .perso__wrapper {
     width: 100px;
     height: 100px;
+  }
+
+  .joueur-1-log,
+  .joueur-2-log {
+    width: 125px;
   }
 }
 @media screen and (max-width:600px){
   .perso__wrapper {
     width: 50px;
     height: 50px;
+  }
+
+  .joueur-1-log,
+  .joueur-2-log {
+    width: 75px;
   }
 }
 
@@ -220,23 +221,6 @@ h2 {
     transform: translate(-93.75%, -50% ); 
   }
 }
-
-/* @keyframes attaque-ligne-1 {
-  from { 
-    transform: translateX(0); 
-  }
-  to { 
-    
-  }
-}
-@keyframes attaque-ligne-2 {
-  from { 
-    transform: translate(0, -50%); 
-  }
-  to { 
-    transform: translate(-93.75%, -50%  ); 
-  }
-} */
 
 @keyframes animation-3-lignes {
   0% {
@@ -263,41 +247,14 @@ h2 {
     transform: translate(-93.75%, -66.66666666%  ); 
   }
 }
-/* @keyframes victoire-ligne-1 {
-  from { 
-    transform: translateX(0); 
-  }
-  to { 
-    transform: translateX(-93.75%); 
-  }
-}
-@keyframes victoire-ligne-2 {
-  from { 
-    transform: translate(0, -33.33333333%); 
-  }
-  to { 
-    transform: translate(-93.75%, -33.33333333%  ); 
-  }
-}
-@keyframes victoire-ligne-3 {
-  from { 
-    transform: translate(0, -66.66666666%); 
-  }
-  to { 
-    transform: translate(-93.75%, -66.66666666%  ); 
-  }
-} */
 
 
 .bloc-perso {
     width: 100%;
-    max-height: 50vh;
+    max-height: 100vh;
 
     
 }
-
-
-
 
 .direction-gauche {
   & img {
@@ -305,13 +262,8 @@ h2 {
   }
 }
 
-.svg {
-    display: none;
-}
-
 .pv-bar {
-    margin: auto;
-    max-width: 50vh;
+    margin: 2rem auto;
     display: flex;
     align-items: center;
     justify-content: space-around;
@@ -322,24 +274,14 @@ progress{
 }
 
 progress[value] {
-    /* Get rid of the default appearance */
     appearance: none;
-    
-    /* This unfortunately leaves a trail of border behind in Firefox and Opera. We can remove that by setting the border to none. */
     border: none;
-    
-    /* Add dimensions */
-    width: 70%; height: 8px;
-    vertical-align: -8px;
+    width: 70%; height: 1rem;
+    vertical-align: -1rem;
 
-    
-    
-    /* Although firefox doesn't provide any additional pseudo class to style the progress element container, any style applied here works on the container. */
-      background-color: whiteSmoke;
-      border-radius: 10px;
-      box-shadow: 0 2px 3px rgba(0,0,0,.5) inset;
-    
-    /* Of all IE, only IE10 supports progress element that too partially. It only allows to change the background-color of the progress value using the 'color' attribute. */
+    background-color: whiteSmoke;
+    border-radius: 10px;
+    box-shadow: 0 2px 3px rgba(0,0,0,.5) inset;
     color: royalblue;
     
     position: relative;
@@ -349,20 +291,35 @@ progress[value] {
 .combat {
     display: flex;
     justify-content: space-around;
-    align-items: center;
-    height: 40vh;
-
-    img { 
-      width: 100%;
-      height: 100%;
-    }
+    margin-top: 2rem;
 }
+
+.joueur-1-log .pv-bar {
+  -webkit-flex-direction: row-reverse; 
+  flex-direction: row-reverse;
+}
+
+
 .combat {
+  & .attaque {
+    background-image: url('/img/300w/weapon-1.png');
+    background-size: 70%;
+  }
+
+  & .defense {
+    background-image: url('/img/300w/bouclier.png');
+    background-size: 55%;
+  }
 
   & .attaque,
   & .defense {
-      width: 10vh;
-      padding: 10px;
+    
+    background-repeat: no-repeat;
+    background-position: center;
+
+      width: 6rem;
+      height: 6rem;
+      padding: .5rem;
       background-color: $color-yellow-light;
       border-radius: 5px;
       box-shadow: 3px 3px 7px $color-yellow-dark;
@@ -380,6 +337,8 @@ progress[value] {
   
   }
 }
+
+
 
 .fin-jeu {
     position: absolute;
@@ -412,11 +371,6 @@ progress[value] {
   }
 }
 
-/*
-Webkit browsers provide two pseudo classes that can be use to style HTML5 progress element.
--webkit-progress-bar -> To style the progress element container
--webkit-progress-value -> To style the progress element value.
-*/
 
 progress::-webkit-progress-bar {
     background-color: red;
@@ -432,12 +386,7 @@ progress::-webkit-progress-value {
     
 }
 
-@keyframes animate-stripes { 100% { background-position: -100px 0; } }
-
-/* Let's spice up things little bit by using pseudo elements. */
-
 progress[value]::-webkit-progress-value:after {
-    /* Only webkit/blink browsers understand pseudo elements on pseudo classes. A rare phenomenon! */
     content: '';
     position: absolute;
     
@@ -448,467 +397,26 @@ progress[value]::-webkit-progress-value:after {
     border-radius: 100%;
 }
 
-/* Firefox provides a single pseudo class to style the progress element value and not for container. -moz-progress-bar */
-
 progress[value]::-moz-progress-bar {
-    /* Gradient background with Stripes */
     background-image:
     -moz-linear-gradient( 135deg,
-                                                     transparent,
-                                                     transparent 33%,
-                                                     rgba(0,0,0,.1) 33%,
-                                                     rgba(0,0,0,.1) 66%,
-                                                     transparent 66%),
+      transparent,
+      transparent 33%,
+      rgba(0,0,0,.1) 33%,
+      rgba(0,0,0,.1) 66%,
+      transparent 66%),
     -moz-linear-gradient( top,
-                                                        rgba(255, 255, 255, .25),
-                                                        rgba(0,0,0,.2)),
+      rgba(255, 255, 255, .25),
+      rgba(0,0,0,.2)),
      -moz-linear-gradient( left, #09c, #f44);
     
     background-size: 35px 20px, 100% 100%, 100% 100%;
     border-radius:3px;
-    
-    /* Firefox doesn't support CSS3 keyframe animations on progress element. Hence, we did not include animate-stripes in this code block */
 }
 
 .pv::-webkit-progress-value  {
-    /* Gradient background with Stripes */
     background-color: green;
 }
-
-/* #weapon-4-3 {
-    transform: translate(45%, 32%);
-}
-
-#weapon-5-3 {
-    transform: translate(45%, 32%);
-}
-*/
-
-
-
-
-
-
-  
-
-
-
-
-.cls-1 {
-    fill: #919345;
-  }
-
-  .cls-2 {
-    fill: #595b2c;
-  }
-
-  .cls-3 {
-    fill: #333217;
-  }
-
-  .cls-4 {
-    fill: #eae47d;
-  }
-
-  .cls-36, .cls-5, .cls-85 {
-
-    fill: none;
- 
-  }
-  
-
-  .cls-16, .cls-44, .cls-5, .cls-51, .cls-66, .cls-85 {
-    stroke: #000;
-    stroke-miterlimit: 10;
-  }
-
-  .cls-5, .cls-66 {
-    stroke-width: 8px;
-  }
-
-  .cls-6 {
-    fill: #6d7612;
-  }
-
-  .cls-7 {
-    fill: #afac54;
-  }
-
-  .cls-8 {
-    fill: #3f1f0a;
-  }
-
-  .cls-9 {
-    fill: #281308;
-  }
-
-  .cls-10 {
-    fill: #844114;
-  }
-
-  .cls-11 {
-    fill: #ffc50d;
-  }
-
-  .cls-12 {
-    fill: #9b6216;
-  }
-
-  .cls-13 {
-    fill: #a0991a;
-  }
-
-  .cls-14 {
-    fill: #626610;
-  }
-
-  .cls-15 {
-    fill: #707638;
-  }
-
-  .cls-16, .cls-35 {
-    fill: #efeee8;
-  }
-
-  .cls-16 {
-    stroke-width: 5px;
-  }
-
-  .cls-17 {
-    fill: #a2a850;
-  }
-
-  .cls-18 {
-    fill: #44441e;
-  }
-
-  .cls-19 {
-    fill: #fffc8a;
-  }
-
-  .cls-20 {
-    fill: #c1c15e;
-  }
-
-  .cls-21 {
-    fill: #5d3110;
-  }
-
-  .cls-22 {
-    fill: #706762;
-  }
-
-  .cls-23 {
-    fill: #918b87;
-  }
-
-  .cls-24 {
-    fill: #423c39;
-  }
-
-  .cls-25 {
-    fill: #ad8515;
-  }
-
-  .cls-26 {
-    fill: #ffde80;
-  }
-
-  .cls-27 {
-    fill: #d86b21;
-  }
-
-  .cls-28 {
-    fill: #842500;
-  }
-
-  .cls-29 {
-    fill: #ea8b24;
-  }
-
-  .cls-30 {
-    fill: #ffd112;
-  }
-
-  .cls-31 {
-    fill: #444406;
-  }
-
-  .cls-32 {
-    fill: #c1c0bd;
-  }
-
-  .cls-33 {
-    fill: #ffe600;
-  }
-
-  .cls-34 {
-    fill: #ddb303;
-  }
-
-  .cls-37 {
-    fill: #7f7f11;
-  }
-
-  .cls-38 {
-    fill: #3a3907;
-  }
-
-  .cls-39 {
-    fill: #dbce33;
-  }
-
-  .cls-40 {
-    fill: #c1c121;
-  }
-
-  .cls-41 {
-    fill: #997417;
-  }
-
-  .cls-42 {
-    fill: #293356;
-  }
-
-  .cls-43 {
-    fill: #6a98e2;
-  }
-
-  .cls-45 {
-    fill: #9fa81a;
-  }
-
-  .cls-46 {
-    fill: #fffa43;
-  }
-
-  .cls-47 {
-    fill: #171e30;
-  }
-
-  .cls-48 {
-    fill: #bcbbbb;
-  }
-
-  .cls-49 {
-    fill: #ff7110;
-  }
-
-  .cls-50 {
-    fill: #891603;
-  }
-
-  .cls-51 {
-    fill: #121523;
-  }
-
-  .cls-52 {
-    fill: #75550e;
-  }
-
-  .cls-53 {
-    fill: #a58a1b;
-  }
-
-  .cls-54 {
-    fill: #755913;
-  }
-
-  .cls-55, .cls-58 {
-    fill: #423107;
-  }
-
-  .cls-56 {
-    fill: #bfa522;
-  }
-
-  .cls-57 {
-    fill: #ffef2c;
-  }
-
-  .cls-58 {
-    opacity: 0.69;
-  }
-
-  .cls-59 {
-    fill: #8e4b25;
-  }
-
-  .cls-60 {
-    fill: #231106;
-  }
-
-  .cls-61 {
-    fill: #e29314;
-  }
-
-  .cls-62, .cls-66 {
-    fill: #848383;
-  }
-
-  .cls-63 {
-    fill: #fff3b6;
-  }
-
-  .cls-64 {
-    fill: #515151;
-  }
-
-  .cls-65 {
-    fill: #2d2c2c;
-  }
-
-  .cls-67 {
-    fill: #a5a4a4;
-  }
-
-  .cls-68 {
-    fill: #1e0d04;
-  }
-
-  .cls-69 {
-    fill: #ceff00;
-  }
-
-  .cls-70 {
-    fill: #49ce02;
-  }
-
-  .cls-71 {
-    fill: #161515;
-  }
-
-  .cls-72 {
-    fill: #bcbcbc;
-  }
-
-  .cls-73 {
-    fill: #210e06;
-  }
-
-  .cls-74 {
-    fill: #4f230b;
-  }
-
-  .cls-75 {
-    fill: #ba7111;
-  }
-
-  .cls-76 {
-    fill: #935115;
-  }
-
-  .cls-77 {
-    fill: #6b340f;
-  }
-
-  .cls-78 {
-    fill: #d3862a;
-  }
-
-  .cls-79 {
-    fill: #4c2610;
-  }
-
-  .cls-80 {
-    fill: #ddd;
-  }
-
-  .cls-81 {
-    fill: #fff;
-  }
-
-  .cls-82 {
-    fill: #5e3112;
-  }
-
-  .cls-83 {
-    fill: #999898;
-  }
-
-  .cls-84 {
-    fill: #3b2413;
-  }
-
-  .cls-85 {
-    stroke-width: 9.62px;
-  }
-
-  .cls-86 {
-    fill: #796f63;
-  }
-
-  .cls-87 {
-    fill: #af9f93;
-  }
-
-  .cls-88 {
-    fill: #524c45;
-  }
-
-  .cls-89 {
-    fill: #3b352f;
-  }
-
-  .cls-90 {
-    fill: #281a11;
-  }
-
-  .cls-91 {
-    fill: #28221c;
-  }
-
-  .cls-92 {
-    fill: #75431e;
-  }
-
-  .cls-93 {
-    fill: #825220;
-  }
-
-  .cls-94 {
-    fill: #5f3719;
-  }
-
-  .cls-95 {
-    fill: #bf8435;
-  }
-
-  .cls-96 {
-    fill: #675c4e;
-  }
-
-  .cls-97 {
-    fill: #4b453e;
-  }
-
-  .cls-98 {
-    fill: #5d554d;
-  }
-
-  .cls-99 {
-    fill: #bdafa7;
-  }
-
-  .cls-100 {
-    fill: #d6cdbf;
-  }
-
-  .cls-101 {
-    fill: #322d28;
-  }
-
-  .cls-102 {
-    fill: #8c8173;
-  }
-
-  .cls-103 {
-    fill: #71695e;
-  }
-
-  .cls-104 {
-    fill: #9e9182;
-  }
 
 .hidden {
     display: none;
@@ -932,8 +440,17 @@ progress[value]::-moz-progress-bar {
        & img {
            width: 20vh;
            height: 20vh;
-       } 
-
-        
+       }  
       }
+  }
+
+  @media screen and (max-width: 900px) {
+    html {
+      font-size: 50%;
+    }
+  }
+  @media screen and (max-width: 600px) {
+    html {
+      font-size: 42%;
+    }
   }

@@ -1,6 +1,3 @@
-import {
-    elements
-} from './base';
 
 export const initialiserAffichagePersonnage = (joueurs, personnagesChoisi, i) => {
     $(`.joueur-${i + 1}-log h2`).text(joueurs[i].personnage.nom);

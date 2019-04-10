@@ -156,7 +156,7 @@ $(document).ready(() => {
         const positionJoueur2Y = joueurs[1].position[1];
 
         if ((positionJoueur1X === positionJoueur2X && (positionJoueur1Y === positionJoueur2Y + 1 || positionJoueur1Y === positionJoueur2Y - 1)) || (positionJoueur1Y === positionJoueur2Y && (positionJoueur1X === positionJoueur2X + 1 || positionJoueur1X === positionJoueur2X - 1)) || (positionJoueur1X === positionJoueur2X + 1 && (positionJoueur1Y === positionJoueur2Y + 1 || positionJoueur1Y === positionJoueur2Y - 1)) || (positionJoueur1X === positionJoueur2X - 1 && (positionJoueur1Y === positionJoueur2Y + 1 || positionJoueur1Y === positionJoueur2Y - 1))) {
-            return personnagesProches = true;
+            return true;
         }
 
         carteView.controleCases(positionJoueur1X, positionJoueur1Y);
@@ -178,7 +178,8 @@ $(document).ready(() => {
 
         coordonneesArmes.length = 0;
         assignerCoordonnees(nombreArme, coordonneesArmes);
-        carteView.afficherArmes(nombreArme, coordonneesAleatoires);
+
+        carteView.afficherArmes(nombreArme, coordonneesArmes);
     }
 
     carteView.definirDirectionPersonnage();

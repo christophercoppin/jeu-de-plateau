@@ -1,6 +1,3 @@
-import {
-    elements
-} from './base';
 
 export const creationCarte = ( nombreDeCasesHorizontal = 10, nombreDeCasesVertical = 10) => {
 
@@ -27,12 +24,12 @@ export const creationCarte = ( nombreDeCasesHorizontal = 10, nombreDeCasesVertic
 
 }
 
-export const initialisationMouvements = (activePlayer) => {
+export const initialisationMouvements = (joueurId) => {
 
-    $(`.joueur-${activePlayer}`).addClass('joueur-actif');
+    $(`.joueur-${joueurId}`).addClass('joueur-actif');
     $('.choix-possible').removeClass('choix-possible');
 
-    let activePlayerCell = $(`.joueur-${activePlayer}`).data();
+    let activePlayerCell = $(`.joueur-${joueurId}`).data();
     const activePlayerCellX = activePlayerCell.casex;
     const activePlayerCellY = activePlayerCell.casey;
     
@@ -191,27 +188,27 @@ export const afficherPersonnage = (coordonneesPersonnage, personnageChoisi, i) =
     $(`[data-casex="${coordonneesPersonnage[0]}"][data-casey="${coordonneesPersonnage[1]}"]`).html(`<img src="img/300w/orc-${personnageChoisi}--weapon-1.png" alt="">`).addClass(`joueur-${i}`);
 }
 
-export const assignerArme = (caseActive, activePlayer, joueur) => {
+export const assignerArme = (caseActive, joueurId, joueur) => {
     if (joueur.idAncienneArme !== '') {
         $(`.joueur-actif`).html(`<img src="img/300w/weapon-${joueur.idAncienneArme}.png" alt="">`).addClass('weapon').data('id-arme', joueur.idAncienneArme);
 
         joueur.idAncienneArme = '';
     }
     
-    $('.joueur-actif').removeClass(`joueur-actif joueur-${activePlayer} direction-gauche direction-droite`);
+    $('.joueur-actif').removeClass(`joueur-actif joueur-${joueurId} direction-gauche direction-droite`);
 
     if ($(caseActive).hasClass('weapon')) {
         joueur.assignerArme($(caseActive).data('id-arme'), joueur.personnage.arme.idArme);
 
-        $(`.joueur-${activePlayer + 1}-log .perso`).css('background-image', `url("img/orc-${joueur.personnage.idPersonnages}--weapon-${joueur.personnage.arme.idArme}-attaque.png")`);
+        $(`.joueur-${joueurId + 1}-log .perso`).css('background-image', `url("img/orc-${joueur.personnage.idPersonnages}--weapon-${joueur.personnage.arme.idArme}-attaque.png")`);
 
         $(caseActive).removeClass('weapon');
     }
 }
 
-export const assignerCaseJoueur = (caseActive, activePlayer, joueur) => {
+export const assignerCaseJoueur = (caseActive, joueurId, joueur) => {
 
-    $(caseActive).addClass(`joueur-${activePlayer}`).html(joueur.personnage.adressePng);
+    $(caseActive).addClass(`joueur-${joueurId}`).html(joueur.personnage.adressePng);
 
 }
 

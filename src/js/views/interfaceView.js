@@ -1,6 +1,3 @@
-import {
-    elements
-} from './base';
 
 export const reduirePointsDeVie = (adversaire, pointsDeVie, i, timeout) => {
 

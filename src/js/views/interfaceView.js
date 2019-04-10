@@ -1,10 +1,11 @@
 
-export const reduirePointsDeVie = (adversaire, pointsDeVie, i, timeout) => {
-
+export const reduirePointsDeVie = (adversaire, pointsDeVie, degats, timeout) => {
+    for(let i = 1; i <= degats; i++) {
     setTimeout(function () {
         $(`.joueur-${adversaire.id + 1}-log .pv-bar span`).text(`${pointsDeVie - i} pv`);
     }, timeout * i);
     $(`.joueur-${adversaire.id + 1}-log progress`).attr('value', adversaire.pointsDeVie);
+}
 }
 
 export const turnToFightMode = (activePlayer) => {
@@ -22,20 +23,27 @@ export const animationVictoire = (activePlayer, joueurs) => {
             opacity: "1"
         }, 700);
 
-        for (let i = 0; i < 6; i++) {
 
             $('.fin-jeu').animate({
                 fontSize: "30px"
             }, 500).animate({
                 fontSize: "50px"
-            }, 500);
-            
-        }
-                
-        setTimeout(() => {
-            $('.reload').removeClass('hidden');
-            resolve('done');
-        },2000);
+            }, 500 ).animate({
+                fontSize: "30px"
+            }, 500).animate({
+                fontSize: "50px"
+            }, 500 ).animate({
+                fontSize: "30px"
+            }, 500).animate({
+                fontSize: "50px"
+            }, 500 ).animate({
+                fontSize: "30px"
+            }, 500).animate({
+                fontSize: "50px"
+            }, 500, () => {
+                $('.reload').removeClass('hidden');
+                resolve('done');
+            } );        
         
     })
 }

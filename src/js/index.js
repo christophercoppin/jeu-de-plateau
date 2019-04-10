@@ -216,9 +216,8 @@ $(document).ready(() => {
 
     $('.attaque').on('click', () => {
         let adversaire = switchPlayer(activePlayer);
-        console.log(joueurs[adversaire].defense);
-
-            personnagesView.animationAttaque(adversaire, activePlayer);
+        interfaceView.visibiliteCommandes(activePlayer);
+            
     
             const pointsDeVie = joueurs[adversaire].pointsDeVie;
             let degats = joueurs[activePlayer].personnage.arme.puissance;
@@ -254,47 +253,35 @@ $(document).ready(() => {
             } else {
                 timeout = 100;
             }
-    
-            setTimeout(() => {
-                for(let i = 1; i <= degats; i++) {
-                    interfaceView.reduirePointsDeVie(joueurs[adversaire], pointsDeVie, i, timeout);
-                }
-            }, 1000);
-    
-            if (joueurs[adversaire].pointsDeVie === 0) {
-
-                interfaceView.animationVictoire(activePlayer, joueurs).then(() => {                  
-                    $('.reload__btn').on('click', () => {
-                        location.reload(false);
-                    });
-                });
-
-                setTimeout(() => {
-                    personnagesView.animePersonnage(joueurs, activePlayer, 'gagne');
-                }, 2010);
-
-                setTimeout(() => {
-                    personnagesView.animePersonnage(joueurs, adversaire, 'mort');
-                }, 1000);
-
-                interfaceView.visibiliteCommandes(activePlayer);
-            } else {
-    
-                setTimeout(() => {
-                    personnagesView.animePersonnage(joueurs, adversaire, 'degats');
-                    
-                    setTimeout(() => {
-                        personnagesView.etatInitialPersonnage(joueurs, adversaire);
-                    }, 2010);
-                }, 1000);
-                setTimeout(() => {
-                    interfaceView.visibiliteCommandes(activePlayer);
-                    interfaceView.visibiliteCommandes(adversaire);
-        
-                    activePlayer = switchPlayer(activePlayer);
-                }, 2010);
+            personnagesView.animationAttaque(adversaire, activePlayer).then(() => {
                 
-            }
+                    interfaceView.reduirePointsDeVie(joueurs[adversaire], pointsDeVie, degats, timeout);
+                
+                
+                if (joueurs[adversaire].pointsDeVie === 0) {
+    
+                    interfaceView.animationVictoire(activePlayer, joueurs).then(() => {                  
+                        $('.reload__btn').on('click', () => {
+                            location.reload(false);
+                        });
+                    });
+                    
+                        personnagesView.animePersonnage(joueurs[activePlayer], 'gagne');
+                        personnagesView.animePersonnage(joueurs[adversaire], 'mort');
+    
+                } else {
+                    
+                    personnagesView.animePersonnage(joueurs[adversaire], 'degats');
+                        
+                    setTimeout(() => {
+                        personnagesView.etatInitialPersonnage(joueurs[adversaire]);
+                        interfaceView.visibiliteCommandes(adversaire);
+            
+                        activePlayer = switchPlayer(activePlayer);
+                    }, 2010);
+                    
+                }
+            });
         
     });
 
@@ -306,12 +293,12 @@ $(document).ready(() => {
             joueurs[adversaire].defense = false;
         }
 
-        personnagesView.animePersonnage(joueurs, activePlayer, 'defense');
-        personnagesView.etatInitialPersonnage(joueurs, adversaire);
+        personnagesView.animePersonnage(joueurs[activePlayer], 'defense');
+        personnagesView.etatInitialPersonnage(joueurs[adversaire]);
 
         joueurs[activePlayer].defense = true;
 
-        interfaceView.visibiliteCommandes(activePlayer);
+        
         interfaceView.visibiliteCommandes(adversaire);
 
         activePlayer = switchPlayer(activePlayer);

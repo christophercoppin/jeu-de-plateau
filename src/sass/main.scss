@@ -119,45 +119,57 @@ h2 {
   background-repeat: no-repeat;
 
   &.attaque {
-    animation-name: attaque-ligne-1, attaque-ligne-2;
-    animation-delay: 0s, 1s;
-    animation-duration: 1s, 1s;
-    animation-timing-function: steps(15), steps(15);
+    /* animation-name: attaque-ligne-1, attaque-ligne-2; */
+    animation-name: animation-2-lignes;
+    /* animation-delay: 0s, 1s; */
+    /* animation-duration: 1s, 1s; */
+    animation-duration: 2s;
+    /* animation-timing-function: steps(15), steps(15); */
+    animation-timing-function: steps(15);
   }
 
   &.degats {
-    background-image: url('/img/orc-1--degats.png');
-    animation-name: attaque-ligne-1, attaque-ligne-2;
-    animation-delay: 0s, 1s;
-    animation-duration: 1s, 1s;
-    animation-timing-function: steps(15), steps(15);
+    /* animation-name: attaque-ligne-1, attaque-ligne-2; */
+    animation-name: animation-2-lignes;
+    /* animation-delay: 0s, 1s; */
+    /* animation-duration: 1s, 1s; */
+    animation-duration: 2s;
+    /* animation-timing-function: steps(15), steps(15); */
+    animation-timing-function: steps(15);
   }
 
   &.defense {
-    background-image: url('/img/orc-1--defense.png');
-    animation-name: attaque-ligne-1, attaque-ligne-2;
-    animation-delay: 0s, 1s;
-    animation-duration: 1s, 1s;
-    animation-timing-function: steps(15), steps(15);
-    transform: translate(-93.75%, -50%  ); 
+    /* animation-name: attaque-ligne-1, attaque-ligne-2; */
+    animation-name: animation-2-lignes;
+    /* animation-delay: 0s, 1s; */
+    /* animation-duration: 1s, 1s; */
+    animation-duration: 2s;
+    /* animation-timing-function: steps(15), steps(15); */
+    animation-timing-function: steps(15);
   }
 
   &.gagne {
     height: 300%;
     background-image: url('/img/orc-1--gagne.png');
-    animation-name: victoire-ligne-1, victoire-ligne-2, victoire-ligne-3 ;
+    /* animation-name: victoire-ligne-1, victoire-ligne-2, victoire-ligne-3 ;
     animation-delay: 0s, 1s, 2s;
     animation-duration: 1s, 1s, 1s;
-    animation-timing-function: steps(15), steps(15), steps(15);
+    animation-timing-function: steps(15), steps(15), steps(15); */
+
+    animation-name: animation-3-lignes;
+    animation-duration: 3s;
+    animation-timing-function: steps(15);
     transform: translate(-93.75%, -66.66666666%  ); 
   }
 
   &.mort {
-    background-image: url('/img/orc-1--mort.png');
-    animation-name: attaque-ligne-1, attaque-ligne-2;
-    animation-delay: 0s, 1s;
-    animation-duration: 1s, 1s;
-    animation-timing-function: steps(15), steps(15);
+    /* animation-name: attaque-ligne-1, attaque-ligne-2; */
+    animation-name: animation-2-lignes;
+    /* animation-delay: 0s, 1s; */
+    /* animation-duration: 1s, 1s; */
+    animation-duration: 2s;
+    /* animation-timing-function: steps(15), steps(15); */
+    animation-timing-function: steps(15);
     transform: translate(-93.75%, -50%  );  
   }
 
@@ -190,12 +202,31 @@ h2 {
     height: 50px;
   }
 }
-@keyframes attaque-ligne-1 {
+
+@keyframes animation-2-lignes {
+  0% {
+    transform: translateX(0); 
+  }
+
+  50% {
+    transform: translateX(-93.75%); 
+  }
+
+  50.00000001% {
+    transform: translate(0, -50%); 
+  }
+
+  100% {
+    transform: translate(-93.75%, -50% ); 
+  }
+}
+
+/* @keyframes attaque-ligne-1 {
   from { 
     transform: translateX(0); 
   }
   to { 
-    transform: translateX(-93.75%); 
+    
   }
 }
 @keyframes attaque-ligne-2 {
@@ -205,8 +236,34 @@ h2 {
   to { 
     transform: translate(-93.75%, -50%  ); 
   }
+} */
+
+@keyframes animation-3-lignes {
+  0% {
+    transform: translateX(0); 
+  }
+
+  33.33333333% {
+    transform: translateX(-93.75%); 
+  }
+
+  33.33333334% {
+    transform: translate(0, -33.33333333%); 
+  }
+
+  66.66666666% {
+    transform: translate(-93.75%, -33.33333333%  ); 
+  }
+
+  66.66666667% {
+    transform: translate(0, -66.66666666%); 
+  }
+
+  100% {
+    transform: translate(-93.75%, -66.66666666%  ); 
+  }
 }
-@keyframes victoire-ligne-1 {
+/* @keyframes victoire-ligne-1 {
   from { 
     transform: translateX(0); 
   }
@@ -229,7 +286,7 @@ h2 {
   to { 
     transform: translate(-93.75%, -66.66666666%  ); 
   }
-}
+} */
 
 
 .bloc-perso {

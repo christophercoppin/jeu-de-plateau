@@ -288,20 +288,22 @@ $(document).ready(() => {
     $('.defense').on('click', () => {
 
         let adversaire = switchPlayer(activePlayer);
+        interfaceView.visibiliteCommandes(activePlayer);
 
         if ( joueurs[adversaire].defense) {
             joueurs[adversaire].defense = false;
         }
 
-        personnagesView.animePersonnage(joueurs[activePlayer], 'defense');
-        personnagesView.etatInitialPersonnage(joueurs[adversaire]);
+        personnagesView.animePersonnage(joueurs[activePlayer], 'defense').then(() => {
 
-        joueurs[activePlayer].defense = true;
-
-        
-        interfaceView.visibiliteCommandes(adversaire);
-
-        activePlayer = switchPlayer(activePlayer);
+            personnagesView.etatInitialPersonnage(joueurs[adversaire]);
+    
+            joueurs[activePlayer].defense = true;
+    
+            interfaceView.visibiliteCommandes(adversaire);
+    
+            activePlayer = switchPlayer(activePlayer);
+        });
     });
 
     const switchPlayer = (active) => {

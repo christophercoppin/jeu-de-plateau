@@ -140,6 +140,7 @@ h2 {
     animation-name: animation-2-lignes;
     animation-duration: 2s;
     animation-timing-function: steps(15);
+    transform: translate(-93.75%, -50%  );  
   }
 
   &.gagne {
@@ -206,14 +207,14 @@ h2 {
 
 @keyframes animation-2-lignes {
   0% {
-    transform: translateX(0); 
+    transform: translate(0, 0); 
   }
 
   50% {
-    transform: translateX(-93.75%); 
+    transform: translate(-93.75%, 0); 
   }
 
-  50.00000001% {
+  50.001% {
     transform: translate(0, -50%); 
   }
 
@@ -227,19 +228,19 @@ h2 {
     transform: translateX(0); 
   }
 
-  33.33333333% {
+  33.333% {
     transform: translateX(-93.75%); 
   }
 
-  33.33333334% {
+  33.334% {
     transform: translate(0, -33.33333333%); 
   }
 
-  66.66666666% {
+  66.666% {
     transform: translate(-93.75%, -33.33333333%  ); 
   }
 
-  66.66666667% {
+  66.667% {
     transform: translate(0, -66.66666666%); 
   }
 

@@ -3,7 +3,7 @@ import Personnages from './Personnages';
 export default class Joueurs {
     constructor (idJoueur) {
         this.id = idJoueur;
-        this.pointsDeVie = 30;
+        this.pointsDeVie = 100;
         this.attaque = 10;
         this.defense = false;
     }

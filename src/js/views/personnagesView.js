@@ -28,7 +28,13 @@ export const animationAttaque = (adversaire, activePlayer) => {
 }
 
 export const animePersonnage = (joueur, animation) => {
-    $(`.joueur-${joueur.id + 1}-log .perso`)
-    .css('background-image', `url("img/orc-${joueur.personnage.idPersonnages}--${animation}.png")`)
-    .addClass(animation);
+    return new Promise((resolve, reject) => {
+        $(`.joueur-${joueur.id + 1}-log .perso`)
+        .css('background-image', `url("img/orc-${joueur.personnage.idPersonnages}--${animation}.png")`)
+        .addClass(animation).one('webkitAnimationend oAnimationEnd msAnimationEnd animationend',   
+        function(e) {            
+            resolve('done');
+      });
+        
+    });
 }

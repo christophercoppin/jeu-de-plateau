@@ -304,25 +304,26 @@ progress[value] {
 .combat {
   & .attaque {
     background-image: url('/img/300w/weapon-1.png');
-    background-size: 70%;
+    background-size: 50%;
   }
 
   & .defense {
     background-image: url('/img/300w/bouclier.png');
-    background-size: 55%;
+    background-size: 35%;
   }
 
   & .attaque,
   & .defense {
     
     background-repeat: no-repeat;
-    background-position: center;
+    background-position: 50% 75%;
+    color: #000;
 
       width: 6rem;
       height: 6rem;
       padding: .5rem;
       background-color: $color-yellow-light;
-      border-radius: 5px;
+      border-radius: 5px 5px 50% 50%;
       box-shadow: 3px 3px 7px $color-yellow-dark;
   
       &:hover {
@@ -343,15 +344,15 @@ progress[value] {
 
 .fin-jeu {
     position: absolute;
-    top: 0;
+    top:0;
     left: 0;
     width: 100%;
     height: 100%;
     color: #fff;
     z-index: 1000;
     background-color: rgba(24, 25, 38, .7);
-    font-size: 5px;
-    padding-top: 50%;
+    padding-top: 10rem;
+    font-size: 3rem;
     opacity: 0;
     transform: rotate(0deg);
 }
@@ -366,8 +367,8 @@ progress[value] {
 
     background-color: $color-grey-blue-dark;
     color: $color-yellow-light;
-    font-size: 30px;
-    padding: 10px 30px;
+    font-size: 2rem;
+    padding: 1rem 3rem;
     border-radius: 100px;
   }
 }

@@ -15,7 +15,7 @@ export const turnToFightMode = (activePlayer) => {
 export const animationVictoire = (activePlayer, joueurs) => { 
     return new Promise((resolve, reject) => {
         console.log(joueurs[activePlayer]);
-        $('.fin-jeu').text(`${joueurs[activePlayer].personnage.nom} Gagne!!`);
+        $('.fin-jeu').html(`<p>${joueurs[activePlayer].personnage.nom}<br/>Gagne!!</p>`);
         $('.fin-jeu').toggleClass('hidden');
 
         $('.fin-jeu').animate({

@@ -40,6 +40,7 @@ jobs:
             git add .
             git commit -m "Add the dist files"
             git push --force production master
+            scp -r ~/project/img ${USER_NAME}@${HOSTNAME}:/var/repo/jeu-de-plateau/img
             exit
 workflows:
   version: 2

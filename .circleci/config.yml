@@ -33,11 +33,11 @@ jobs:
             cp ~/project/.circleci/known_hosts ~/.ssh/
             git config --global user.email "oldbroth3rz@gmail.com"
             git config --global user.name "Oldbroth3rz"
-            git add .
-            git commit -m 'Add dist folder'
-            git status
             git remote add production ssh://${USER_NAME}@${HOSTNAME}/var/repo/jeu-de-plateau.git
-            git push --force production master
+            git subtree add -prefix dist
+            git add dist -f
+            git commit -am "Add the dist files"
+            git subtree push --force -prefix dist production master
             exit
 workflows:
   version: 2

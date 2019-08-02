@@ -32,12 +32,12 @@ jobs:
           command: |
             cp ~/project/.circleci/known_hosts ~/.ssh/
             cd ~/project/dist
-            git init -y
+            git init
             git config --global user.email "oldbroth3rz@gmail.com"
             git config --global user.name "Oldbroth3rz"
             git remote add production ssh://${USER_NAME}@${HOSTNAME}/var/repo/jeu-de-plateau.git
             git add .
-            git commit -am "Add the dist files"
+            git commit -m "Add the dist files"
             git push --force production master
             exit
 workflows:

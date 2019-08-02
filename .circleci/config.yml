@@ -33,6 +33,8 @@ jobs:
             cp ~/project/.circleci/known_hosts ~/.ssh/
             cd ~/project/dist
             git init
+            cat > .gitignore
+            img
             git config --global user.email "oldbroth3rz@gmail.com"
             git config --global user.name "Oldbroth3rz"
             git remote add production ssh://${USER_NAME}@${HOSTNAME}/var/repo/jeu-de-plateau.git
